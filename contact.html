@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Eric Nieves Coaching</title>
+  <meta name="description" content="Get in touch with Eric Nieves, personal trainer in Lake Norman, NC. Questions about training, scheduling, or online coaching — he replies personally.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+
+      <a href="index.html" class="logo-link" aria-label="Eric Nieves Coaching — Home">
+        <img
+          src="assets/logo-header.png"
+          alt="Eric Nieves Coaching"
+          height="42"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        >
+        <span class="logo-text" style="display:none">
+          ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#testimonials">Results</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="contact.html">Contact</a>
+        <a href="schedule.html" class="btn btn-red">Free Assessment</a>
+      </nav>
+
+      <button
+        class="hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#testimonials">Results</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="contact.html">Contact</a>
+    <a href="schedule.html" class="btn btn-red" style="margin-top:0.5rem">Free Assessment</a>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HERO
+    ============================================================ -->
+    <section class="page-hero" aria-labelledby="contact-heading">
+      <div class="page-hero-wedge" aria-hidden="true"></div>
+      <div class="pinstripe" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Let's talk</p>
+        <h1 id="contact-heading" class="display page-hero-headline">Get in touch</h1>
+        <p class="page-hero-sub">
+          Whether you have questions about training, want to know if online coaching
+          is a fit, or just need to figure out a schedule — send a message and Eric
+          will get back to you personally, usually same day.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT SECTION
+    ============================================================ -->
+    <section class="contact-section" aria-label="Contact information and form">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- LEFT: Contact info cards -->
+          <div class="contact-cards">
+
+            <!-- Email -->
+            <div class="contact-card reveal">
+              <div class="contact-icon-tile" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Email</p>
+                <p class="contact-card-value">
+                  <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="contact-card reveal">
+              <div class="contact-icon-tile" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Phone &amp; text</p>
+                <p class="contact-card-value">
+                  <a href="tel:+17045550142">(704) 555-0142</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Service area -->
+            <div class="contact-card reveal">
+              <div class="contact-icon-tile" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Service area</p>
+                <p class="contact-card-value">
+                  Lake Norman · Cornelius · Davidson<br>
+                  Huntersville · Mooresville · Charlotte<br>
+                  <span style="color:var(--steel); font-size:0.85em">+ Online coaching anywhere</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="contact-card reveal">
+              <div class="contact-icon-tile" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Hours</p>
+                <p class="contact-card-value">
+                  Mon – Fri &nbsp; 5:30 am – 7:00 pm<br>
+                  Saturday &nbsp; 7:00 am – 12:00 pm<br>
+                  Sunday &nbsp;&nbsp;&nbsp; By appointment
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <!-- end contact-cards -->
+
+          <!-- RIGHT: Contact form -->
+          <div class="contact-form-wrap reveal-right">
+
+            <h2 class="display" style="font-size:clamp(1.6rem,3vw,2.25rem); margin-bottom:1.75rem">
+              Send a message
+            </h2>
+
+            <!--
+              TODO: CONTACT FORM BACKEND
+              ═══════════════════════════════════════════════════════
+              This form is currently front-end only — submissions
+              are caught by main.js and show a confirmation message
+              but are NOT sent anywhere.
+
+              To wire it up, choose one of the following:
+
+              ── OPTION A: Formspree (simplest, free tier available) ──
+                1. Create a free account at https://formspree.io
+                2. Create a new form and copy your endpoint
+                3. Replace action="#" with:
+                   action="https://formspree.io/f/YOUR_FORM_ID"
+                4. Change method to method="POST"
+                5. Add: <input type="hidden" name="_subject" value="New message from ericnievescoaching.com">
+                6. Remove the e.preventDefault() in main.js (or keep
+                   it and use fetch() for an AJAX submit instead)
+
+              ── OPTION B: Netlify Forms (if hosting on Netlify) ──
+                1. Add the netlify attribute to the <form> tag:
+                   <form name="contact" method="POST" netlify>
+                2. Add: <input type="hidden" name="form-name" value="contact">
+                3. Netlify detects the form on deploy and handles
+                   submissions with no backend code needed.
+
+              ── OPTION C: Square Contact (if centralising in Square) ──
+                Replace this form with a Square Online contact block
+                or link to Square's hosted contact page.
+              ═══════════════════════════════════════════════════════
+            -->
+            <form
+              id="contact-form"
+              action="#"
+              method="POST"
+              novalidate
+              aria-label="Contact form"
+            >
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="first-name">First name <span aria-hidden="true">*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="first-name"
+                    name="first_name"
+                    autocomplete="given-name"
+                    placeholder="Marcus"
+                    required
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="last-name">Last name <span aria-hidden="true">*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="last-name"
+                    name="last_name"
+                    autocomplete="family-name"
+                    placeholder="Thompson"
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="email">Email <span aria-hidden="true">*</span></label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="you@email.com"
+                    required
+                  >
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone (optional)</label>
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    autocomplete="tel"
+                    placeholder="(704) 555-0100"
+                  >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="goal">What's your main goal? <span aria-hidden="true">*</span></label>
+                <select class="form-select" id="goal" name="goal" required>
+                  <option value="" disabled selected>Select a goal…</option>
+                  <option value="lose_weight">Lose weight</option>
+                  <option value="build_strength">Build strength</option>
+                  <option value="return_from_injury">Return from injury</option>
+                  <option value="general_fitness">General fitness</option>
+                  <option value="online_coaching">Online coaching</option>
+                  <option value="not_sure">Not sure yet</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="message">Message <span aria-hidden="true">*</span></label>
+                <textarea
+                  class="form-textarea"
+                  id="message"
+                  name="message"
+                  placeholder="Tell Eric a bit about where you're at and what you're looking for…"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-submit-row">
+                <button type="submit" class="btn btn-red">
+                  Send message
+                  <!-- Arrow icon -->
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Shown after JS intercepts submit -->
+              <div id="form-confirmation" class="form-confirmation" role="status" aria-live="polite">
+                <strong>Message received.</strong> Eric will get back to you personally — usually same day.
+              </div>
+
+            </form>
+          </div>
+          <!-- end contact-form-wrap -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA BAND
+    ============================================================ -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="cta-band-texture" aria-hidden="true"></div>
+      <div class="container cta-band-inner">
+        <p class="cta-band-eyebrow">Ready to start?</p>
+        <h2 id="cta-heading" class="display cta-band-headline">Your first session is on me.</h2>
+        <p class="cta-band-sub">
+          Book a free assessment — no pressure, no contract. Let's see if we're a fit.
+        </p>
+        <a href="schedule.html" class="btn btn-white">Book your free assessment</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div>
+          <a href="index.html" aria-label="Eric Nieves Coaching — Home">
+            <img
+              src="assets/logo-stacked.png"
+              alt="Eric Nieves Coaching"
+              class="footer-logo-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            >
+            <div class="footer-logo-text" style="display:none">
+              <span class="en">EN<span class="accent"> ·</span></span>
+              <span class="sub">Eric Nieves Coaching</span>
+            </div>
+          </a>
+          <p class="footer-blurb">
+            Personal training and coaching in the Lake Norman area of Charlotte, NC.
+            Built around your life, your body, and your goals.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Explore</p>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Eric</a></li>
+            <li><a href="index.html#testimonials">Client Results</a></li>
+            <li><a href="schedule.html">Schedule a Session</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Get in touch</p>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <a href="tel:+17045550142">(704) 555-0142</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Lake Norman, NC
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p>
+        <p class="footer-copy">Lake Norman · Charlotte, NC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <script src="main.js"></script>
+</body>
+</html>

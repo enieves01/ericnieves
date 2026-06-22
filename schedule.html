@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule a Session — Eric Nieves Coaching</title>
+  <meta name="description" content="Book a free fitness assessment with Eric Nieves in the Lake Norman area. No pressure, no contract — just a starting line.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+
+      <a href="index.html" class="logo-link" aria-label="Eric Nieves Coaching — Home">
+        <img
+          src="assets/logo-header.png"
+          alt="Eric Nieves Coaching"
+          height="42"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        >
+        <span class="logo-text" style="display:none">
+          ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#testimonials">Results</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="contact.html">Contact</a>
+        <a href="schedule.html" class="btn btn-red">Free Assessment</a>
+      </nav>
+
+      <button
+        class="hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#testimonials">Results</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="contact.html">Contact</a>
+    <a href="schedule.html" class="btn btn-red" style="margin-top:0.5rem">Free Assessment</a>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HERO
+    ============================================================ -->
+    <section class="page-hero" aria-labelledby="schedule-heading">
+      <div class="page-hero-wedge" aria-hidden="true"></div>
+      <div class="pinstripe" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Book your spot</p>
+        <h1 id="schedule-heading" class="display page-hero-headline">Schedule a session</h1>
+        <p class="page-hero-sub">
+          Your first assessment is completely free — no contract, no pressure, no hard sell.
+          Pick a time below, show up ready to move, and let's figure out where you're starting
+          from and where you want to go.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BOOKING SECTION
+    ============================================================ -->
+    <section class="schedule-section" aria-labelledby="booking-steps-heading">
+      <div class="container">
+        <div class="schedule-grid">
+
+          <!-- LEFT: Steps -->
+          <div>
+            <h2 id="booking-steps-heading" class="display section-headline reveal" style="font-size:clamp(1.8rem,3.5vw,2.75rem); margin-bottom:2.5rem">
+              Three steps to<br>your first session
+            </h2>
+
+            <div class="step-list">
+
+              <div class="step-item reveal">
+                <div class="step-badge" aria-hidden="true">1</div>
+                <div>
+                  <p class="step-title">Choose a time</p>
+                  <p class="step-desc">
+                    Pick a date and time from the live booking calendar. Free assessment
+                    slots are typically available within a day or two.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item reveal">
+                <div class="step-badge" aria-hidden="true">2</div>
+                <div>
+                  <p class="step-title">Confirm with Square</p>
+                  <p class="step-desc">
+                    You'll receive an email confirmation through Square Appointments.
+                    No credit card is required for the initial free assessment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item reveal">
+                <div class="step-badge" aria-hidden="true">3</div>
+                <div>
+                  <p class="step-title">Show up ready</p>
+                  <p class="step-desc">
+                    Wear workout clothes, bring water, and come ready to move. Expect a
+                    movement screen and a real conversation — no fluff, no sales pitch.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Questions? -->
+            <div style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line);">
+              <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Questions first?</p>
+              <p style="font-size:0.9rem; color:var(--muted); line-height:1.7; max-width:340px;">
+                No problem. Reach out directly and Eric will get back to you
+                personally — usually same day.
+              </p>
+              <a href="contact.html" class="btn btn-ghost" style="margin-top:1.25rem">
+                Send a message
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT: Square booking embed -->
+          <div class="booking-box reveal-right">
+
+            <!-- ══════════════════════════════════════════════════════
+                 TODO: SQUARE APPOINTMENTS EMBED
+                 ══════════════════════════════════════════════════════
+
+                 Replace the placeholder below with your Square embed.
+                 Two options are available:
+
+                 ── OPTION A: Script Widget (requires Paid Appointments plan) ──
+                 Paste the following inside this <div class="booking-box">:
+
+                   <script src="https://square.site/appointments/buyer/widget/REPLACE_WITH_YOUR_WIDGET_ID/en-US.js"></script>
+
+                 The widget ID is found in Square Dashboard →
+                 Appointments → Website Widget.
+
+                 ── OPTION B: iFrame Embed (requires Paid Appointments plan) ──
+                 Alternatively, embed the hosted booking page in an iframe:
+
+                   <iframe
+                     src="https://square.site/appointments/buyer/widget/REPLACE_WITH_YOUR_WIDGET_ID/en-US"
+                     width="100%"
+                     height="750"
+                     frameborder="0"
+                     title="Book a session with Eric Nieves Coaching"
+                   ></iframe>
+
+                 ── OPTION C: Link to hosted booking page (Free plan) ──
+                 If you're on Square's free plan, the widget embed is not
+                 available. Instead, update the href on the button inside
+                 .booking-placeholder to your Square booking page URL:
+                   https://book.squareup.com/appointments/REPLACE_WITH_YOUR_BOOKING_LINK/location/REPLACE_WITH_LOCATION_ID/services
+
+                 To find your booking page URL: Square Dashboard →
+                 Appointments → Online Booking → Booking Website.
+
+                 REMOVE this comment block and the .booking-placeholder div
+                 once the embed is live.
+                 ══════════════════════════════════════════════════════ -->
+
+            <p class="footer-col-title" style="margin-bottom:1.25rem">Live booking calendar</p>
+
+            <!-- Placeholder — visible until Square embed is connected -->
+            <div class="booking-placeholder" role="region" aria-label="Booking calendar placeholder">
+              <div class="booking-placeholder-icon" aria-hidden="true">📅</div>
+              <p class="booking-placeholder-title">Square Appointments</p>
+              <p class="booking-placeholder-sub">
+                The live booking calendar will appear here once Square Appointments is connected.
+              </p>
+              <!-- TODO: Replace the href with your Square booking page URL -->
+              <a
+                href="https://book.squareup.com/appointments/REPLACE_WITH_YOUR_BOOKING_LINK"
+                class="btn btn-red"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open booking page
+              </a>
+            </div>
+
+            <p class="booking-note">
+              <strong>Note:</strong> Square's embeddable widget requires a paid Appointments plan.
+              On the free plan, the hosted booking page link above works just as well.
+              See the code comment above for both embed formats.
+            </p>
+
+          </div>
+          <!-- end booking-box -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA BAND
+    ============================================================ -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="cta-band-texture" aria-hidden="true"></div>
+      <div class="container cta-band-inner">
+        <p class="cta-band-eyebrow">No contract. No pressure.</p>
+        <h2 id="cta-heading" class="display cta-band-headline">Your first session is on me.</h2>
+        <p class="cta-band-sub">
+          Book a free assessment — no pressure, no contract. Let's see if we're a fit.
+        </p>
+        <a href="contact.html" class="btn btn-white">Have a question first?</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div>
+          <a href="index.html" aria-label="Eric Nieves Coaching — Home">
+            <img
+              src="assets/logo-stacked.png"
+              alt="Eric Nieves Coaching"
+              class="footer-logo-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            >
+            <div class="footer-logo-text" style="display:none">
+              <span class="en">EN<span class="accent"> ·</span></span>
+              <span class="sub">Eric Nieves Coaching</span>
+            </div>
+          </a>
+          <p class="footer-blurb">
+            Personal training and coaching in the Lake Norman area of Charlotte, NC.
+            Built around your life, your body, and your goals.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Explore</p>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Eric</a></li>
+            <li><a href="index.html#testimonials">Client Results</a></li>
+            <li><a href="schedule.html">Schedule a Session</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Get in touch</p>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <a href="tel:+17045550142">(704) 555-0142</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Lake Norman, NC
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p>
+        <p class="footer-copy">Lake Norman · Charlotte, NC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <script src="main.js"></script>
+</body>
+</html>
