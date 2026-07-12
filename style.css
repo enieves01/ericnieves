@@ -2,7 +2,7 @@
    ERIC NIEVES COACHING — shared styles
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap');
 
 /* === VARIABLES === */
 :root {
@@ -14,10 +14,8 @@
   --line:       #262629;
   --red:        #9e1b22;
   --red-bright: #c1272d;
-  --silver:     #c9ccd1;
   --steel:      #7c8089;
 
-  --header-h:  78px;
   --max-w:     1200px;
   --gutter:    clamp(1.25rem, 5vw, 2.5rem);
   --radius:    2px;
@@ -41,12 +39,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 ul     { list-style: none; }
 
 /* === TYPOGRAPHY HELPERS === */
-.display {
-  font-family: 'Saira Condensed', sans-serif;
+.display-alt {
+  font-family: 'Tomorrow', sans-serif;
   font-style: italic;
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 /* === EYEBROW === */
@@ -127,35 +126,26 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   filter: none;
 }
 
-/* === HEADER === */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: var(--header-h);
-  display: flex;
+/* Home page redesign — skewed like the original parallelogram cut, but
+   with soft rounded corners. clip-path can't round corners, so instead
+   the whole button is sheared with a transform (which naturally rounds
+   under border-radius) and the label is counter-sheared to stay upright. */
+.btn-skew {
+  clip-path: none;
+  border-radius: 6px;
+  transform: skewX(-10deg);
+}
+.btn-skew:hover { transform: skewX(-10deg) translateY(-1px); }
+.btn-skew:active { transform: skewX(-10deg) translateY(0); }
+.btn-skew .btn-label {
+  display: inline-flex;
   align-items: center;
-  background: rgba(10, 10, 11, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
+  gap: 0.5rem;
+  transform: skewX(10deg);
 }
 
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: var(--max-w);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  gap: 2rem;
-}
-
-.logo-link { display: flex; align-items: center; }
-.logo-link img { height: 42px; width: auto; }
-
-/* Text fallback rendered when logo image isn't available */
+/* === LOGO TEXT FALLBACK === */
+/* Rendered when the logo image asset isn't available (see hero-logo). */
 .logo-text {
   font-family: 'Saira Condensed', sans-serif;
   font-style: italic;
@@ -166,73 +156,6 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   line-height: 1;
 }
 .logo-text .accent { color: var(--red-bright); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-}
-.nav-links a {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  transition: color var(--ease);
-}
-.nav-links a:hover,
-.nav-links a.active { color: var(--ink); }
-.nav-links a:focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 2px; }
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  padding: 8px;
-  border-radius: 2px;
-}
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--ink);
-  transition: transform 0.2s, opacity 0.2s;
-  transform-origin: center;
-}
-.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.hamburger:focus-visible { outline: 2px solid var(--red-bright); }
-
-/* Mobile nav drawer */
-.mobile-nav {
-  display: none;
-  position: fixed;
-  inset: var(--header-h) 0 0 0;
-  background: rgba(10, 10, 11, 0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2.25rem;
-  z-index: 99;
-}
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-  font-family: 'Saira Condensed', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-  font-size: clamp(2rem, 10vw, 3.5rem);
-  color: var(--ink);
-  transition: color var(--ease);
-  line-height: 1;
-}
-.mobile-nav a:hover { color: var(--red-bright); }
-.mobile-nav a:focus-visible { outline: 2px solid var(--red-bright); }
 
 /* === PINSTRIPE TEXTURE === */
 .pinstripe {
@@ -253,69 +176,215 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: calc(100svh - var(--header-h));
+  min-height: 100svh;
+  /* .hero-inner-2 already carries its own precise padding — override the
+     global `section` padding-block so it doesn't stack an extra ~200px+
+     on top and throw off the hero's actual rendered height. */
+  padding-block: 0;
   display: flex;
-  align-items: center;
-  background: var(--panel);
+  align-items: flex-start;
+  background: var(--black);
 }
 
-/* The diagonal red wedge behind the portrait */
-.hero-wedge {
+/* Diagonal wedge photo — pre-clipped PNG exported from Figma (alpha
+   transparency outside the wedge shape), positioned via the exact
+   inset percentages from the design so it scales with the section. */
+.hero-photo-wedge {
   position: absolute;
-  right: -8%;
-  top: -10%;
-  width: 52%;
-  height: 125%;
-  background: linear-gradient(140deg, var(--red) 0%, #4a0a0e 52%, var(--black) 100%);
-  transform: skewX(-12deg);
+  inset: -10% 50.27% -14.7% -17.88%;
   z-index: 0;
 }
+.hero-photo-wedge img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain (not cover) so the pre-clipped diagonal edge is never
+     cropped when the viewport's aspect ratio differs from the
+     design's — cover would slice into the wedge shape itself. */
+  object-fit: contain;
+}
 
-.hero-inner {
+/* Small-breakpoint photo band — a plain full-bleed landscape crop (no
+   diagonal/skew), per the Figma small frame. Hidden by default; shown
+   at the 970px breakpoint. Lives as a direct .hero child (not inside
+   .hero-inner-2) so its full width isn't eaten by the text column's
+   side padding. */
+.hero-photo-band {
+  display: none;
+  width: 100%;
+  aspect-ratio: 971 / 502;
+  margin-top: 1.5rem;
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-  padding-block: clamp(4rem, 8vw, 6rem);
+  /* Top edge only, on a diagonal — right corner higher than left. */
+  clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+}
+.hero-photo-band img {
   width: 100%;
-  max-width: var(--max-w);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+  height: 100%;
+  object-fit: cover;
 }
 
-.hero-headline {
-  font-size: clamp(3.25rem, 6.5vw, 5.75rem);
-  margin-bottom: 1.5rem;
+/* Nav integrated into the hero itself (per design) — not a separate
+   sticky header. Sits over the photo/black background, top-right. */
+.hero-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2.5rem;
+  padding-block: 1.75rem;
+  padding-left: var(--gutter);
+  /* Matches .hero-inner-2's right padding so the nav, headline and CTA
+     row all share the same right edge at every breakpoint. */
+  padding-right: clamp(1rem, 2vw, 3rem);
 }
-.hero-headline .accent { color: var(--red-bright); }
+.hero-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.hero-nav-links a {
+  font-family: 'Tomorrow', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  transition: color var(--ease);
+}
+.hero-nav-links a:hover { color: var(--red-bright); }
+.hero-nav-links a:focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 2px; }
 
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--muted);
-  line-height: 1.72;
-  max-width: 480px;
-  margin-bottom: 2.25rem;
+.hero-logo { display: flex; align-items: center; }
+.hero-logo img { height: 42px; width: auto; }
+
+/* Hamburger — smallest breakpoint only, replaces .hero-nav-links.
+   Skewed rounded parallelogram like .btn-skew, with a 3-bar icon that
+   morphs into an X via [aria-expanded="true"] (no extra JS classes). */
+.hero-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--red-bright);
+  border-radius: 6px;
+  transform: skewX(-10deg);
+  transition: filter var(--ease);
 }
+.hero-hamburger:hover { filter: brightness(1.14); }
+.hero-hamburger:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.hero-hamburger-icon {
+  position: relative;
+  width: 20px;
+  height: 14px;
+  transform: skewX(10deg);
+}
+.hero-hamburger-icon span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+}
+.hero-hamburger-icon span:nth-child(1) { top: 0; }
+.hero-hamburger-icon span:nth-child(2) { top: 6px; }
+.hero-hamburger-icon span:nth-child(3) { top: 12px; }
+
+.hero-hamburger[aria-expanded="true"] .hero-hamburger-icon span:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+.hero-hamburger[aria-expanded="true"] .hero-hamburger-icon span:nth-child(2) { opacity: 0; }
+.hero-hamburger[aria-expanded="true"] .hero-hamburger-icon span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+/* Full-screen menu overlay — starts below the header row (logo +
+   hamburger stay visible on the black hero background above it) and
+   covers the rest of the viewport. Opened via .open (main.js). */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 149px;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(2rem, 5.5vw, 3.3rem);
+  background: var(--red-bright);
+  padding: 2.5rem clamp(1rem, 3.91vw, 2rem);
+  max-height: calc(100vh - 149px);
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Tomorrow', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.708vw, 2.25rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color var(--ease);
+}
+.mobile-menu a:hover { color: var(--black); }
+.mobile-menu a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+@media (min-width: 971px) {
+  .mobile-menu.open { display: none; }
+}
+
+.hero-inner-2 {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
+  padding-left: clamp(2rem, 21.8vw, 27rem);
+  padding-right: clamp(1rem, 2vw, 3rem);
+  padding-top: clamp(7rem, 24vh, 15rem);
+  padding-bottom: clamp(3rem, 10vh, 6rem);
+}
+
+.hero-headline-2 {
+  font-size: clamp(2.75rem, 9.375vw, 11.25rem);
+  margin-bottom: 2rem;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+.hero-headline-2 .ln { display: block; }
+.hero-headline-2 .ln-shift { margin-left: 1.8em; }
+.hero-headline-2 .accent { color: var(--red-bright); }
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.875rem;
-  margin-bottom: 3rem;
 }
 
-.hero-stats {
+.stats-row {
   display: flex;
   gap: 2.5rem;
   padding-top: 1.75rem;
+  margin-top: 1.75rem;
   border-top: 1px solid var(--line);
 }
 .stat-num {
-  font-family: 'Saira Condensed', sans-serif;
-  font-style: italic;
-  font-weight: 800;
+  font-family: 'Tomorrow', sans-serif;
+  font-weight: 900;
   font-size: 2.6rem;
   line-height: 1;
   color: var(--red-bright);
@@ -329,123 +398,34 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   margin-top: 0.3rem;
 }
 
-/* Portrait column */
-.hero-portrait {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-.portrait-frame {
-  position: relative;
-  width: min(400px, 100%);
-}
-.portrait-img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
-  filter: grayscale(15%) contrast(1.06);
-  background: var(--panel-2); /* placeholder tint while loading */
-}
-.portrait-tag {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--red);
-  color: var(--ink);
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  padding: 0.5rem 1.4rem;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  white-space: nowrap;
+/* === PROCESS SECTION (home page redesign) === */
+.process { background: var(--red-bright); }
+.section-headline-2 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
-/* === PAGE HERO (schedule / contact) === */
-.page-hero {
-  position: relative;
-  overflow: hidden;
-  background: var(--panel);
-  padding-block: clamp(3.5rem, 7vw, 5.5rem);
-}
-.page-hero-wedge {
-  position: absolute;
-  right: -5%;
-  top: -20%;
-  width: 40%;
-  height: 145%;
-  background: linear-gradient(140deg, var(--red) 0%, #4a0a0e 55%, transparent 100%);
-  transform: skewX(-12deg);
-  opacity: 0.65;
-  z-index: 0;
-}
-.page-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 660px;
-}
-.page-hero-headline {
-  font-size: clamp(2.75rem, 5.5vw, 4.5rem);
-  margin-bottom: 1rem;
-}
-.page-hero-sub {
-  font-size: 1.05rem;
-  color: var(--muted);
-  line-height: 1.72;
-  max-width: 520px;
-}
-
-/* === APPROACH SECTION === */
-.approach { background: var(--black); }
-
-.section-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.section-headline { font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
-
-.cards-grid {
+.process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
+.process-card {
+  background: rgba(18, 18, 20, 0.33);
   padding: 2rem 1.75rem;
-  position: relative;
-  transition: transform var(--ease), border-color var(--ease);
-  overflow: hidden;
 }
-/* Animated red top border */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: var(--red-bright);
-  transition: width 0.45s ease;
-}
-.card:hover::before   { width: 100%; }
-.card:hover           { transform: translateY(-4px); border-color: rgba(158,27,34,0.5); }
 
-.card-num {
+.process-num {
   display: block;
-  font-family: 'Saira Condensed', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-  font-size: 3.25rem;
+  font-family: 'Tomorrow', sans-serif;
+  font-weight: 900;
+  font-size: 2.75rem;
   line-height: 1;
-  color: var(--red);
-  opacity: 0.35;
+  color: var(--red-bright);
   margin-bottom: 1.1rem;
 }
-.card-title {
+.process-title {
   font-family: 'Oswald', sans-serif;
   font-weight: 600;
   font-size: 1.05rem;
@@ -454,38 +434,50 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   color: var(--ink);
   margin-bottom: 0.75rem;
 }
-.card-body {
+.process-body {
   font-size: 0.925rem;
-  color: var(--muted);
+  color: var(--ink);
   line-height: 1.72;
 }
 
 /* === ABOUT SECTION === */
-.about {
-  background: var(--panel);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
+.about { background: var(--black); }
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(2.5rem, 6vw, 5rem);
   align-items: center;
 }
-.about-photo-wrap { position: relative; }
+/* Diagonal wedge photo — same pre-clipped-PNG technique as .hero-photo-wedge,
+   insets taken from the design relative to this section's own box. */
+.about-photo-wrap {
+  position: relative;
+  aspect-ratio: 598 / 668;
+}
 .about-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 100%, 14px 100%);
-  filter: grayscale(15%) contrast(1.08);
-  background: var(--panel-2);
+  height: 100%;
+  object-fit: contain;
 }
-.about-headline {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 1.5rem;
+
+/* Mobile-only photo band, shown above the text (order: -1) below ~960px.
+   Capped with max-width instead of scaling to the viewport — at tablet
+   widths a full-bleed band gets disproportionately tall/large. */
+.about-photo-band {
+  display: none;
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+  aspect-ratio: 1462 / 2168;
+  margin-bottom: 1rem;
 }
+.about-photo-band img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .about-body p {
   font-size: 0.96rem;
   color: var(--muted);
@@ -494,98 +486,6 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 }
 .about-body p:last-child { margin-bottom: 0; }
 .about-body strong { color: var(--ink); font-weight: 600; }
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.75rem;
-}
-.chip {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--line);
-  color: var(--silver);
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  background: var(--panel-2);
-}
-
-/* === TESTIMONIALS === */
-.testimonials { background: var(--panel-2); }
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-.testimonial-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 2rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-}
-.quote-mark {
-  display: block;
-  font-family: 'Saira Condensed', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-  font-size: 5.5rem;
-  line-height: 0.75;
-  color: var(--red);
-  opacity: 0.3;
-  margin-bottom: 0.4rem;
-  user-select: none;
-  aria-hidden: true;
-}
-.stars {
-  display: flex;
-  gap: 3px;
-  margin-bottom: 1rem;
-}
-.stars svg { fill: var(--red-bright); }
-.testimonial-quote {
-  font-size: 0.95rem;
-  line-height: 1.72;
-  color: var(--ink);
-  font-style: italic;
-  flex: 1;
-  margin-bottom: 1.5rem;
-}
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-.author-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--ink);
-  flex-shrink: 0;
-}
-.author-name {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: var(--ink);
-}
-.author-location {
-  font-size: 0.75rem;
-  color: var(--steel);
-  margin-top: 0.1rem;
-}
 
 /* === CTA BAND === */
 .cta-band {
@@ -637,9 +537,16 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   margin-bottom: 2.25rem;
 }
 
+/* Home page redesign — bigger two-tone split headline */
+.cta-band-headline--split {
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  margin-bottom: 2rem;
+}
+.cta-band-headline--split .muted-black { color: var(--black); }
+
 /* === FOOTER === */
 .site-footer {
-  background: var(--panel);
+  background: #000;
   border-top: 1px solid var(--line);
   padding-block: clamp(3rem, 6vw, 5rem);
 }
@@ -649,6 +556,9 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   gap: 3rem;
   margin-bottom: 3rem;
 }
+/* Home page redesign — simplified 2-column footer (no Explore column,
+   since nav is anchor-based now) */
+.footer-grid--simple { grid-template-columns: 1.5fr 1fr; }
 .footer-logo-img { height: 60px; width: auto; margin-bottom: 1.25rem; }
 .footer-logo-text {
   font-family: 'Saira Condensed', sans-serif;
@@ -675,30 +585,13 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.72;
-  max-width: 280px;
+  max-width: 360px;
 }
 .footer-col-title {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--silver);
+  font-size: 1.625rem;
+  color: var(--red-bright);
   margin-bottom: 1.25rem;
 }
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.footer-links a {
-  font-size: 0.875rem;
-  color: var(--muted);
-  transition: color var(--ease);
-}
-.footer-links a:hover { color: var(--ink); }
-.footer-links a:focus-visible { outline: 2px solid var(--red-bright); border-radius: 1px; }
-
 .footer-contact-item {
   display: flex;
   align-items: flex-start;
@@ -727,181 +620,7 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   color: var(--steel);
 }
 
-/* === SCHEDULE PAGE === */
-.schedule-section { background: var(--black); }
-.schedule-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.45fr;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
-  align-items: start;
-}
-
-.step-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.step-item {
-  display: flex;
-  gap: 1.25rem;
-  align-items: flex-start;
-}
-.step-badge {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  background: var(--red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  font-family: 'Saira Condensed', sans-serif;
-  font-style: italic;
-  font-weight: 800;
-  font-size: 1.35rem;
-  color: var(--ink);
-}
-.step-title {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  margin-bottom: 0.3rem;
-}
-.step-desc {
-  font-size: 0.875rem;
-  color: var(--muted);
-  line-height: 1.68;
-}
-
-.booking-box {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 2.5rem;
-  position: relative;
-  overflow: hidden;
-}
-.booking-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--red), var(--red-bright));
-}
-.booking-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 320px;
-  padding: 3rem 1.5rem;
-  gap: 1rem;
-  background: var(--panel-2);
-  border: 1px dashed var(--line);
-}
-.booking-placeholder-icon {
-  font-size: 2.5rem;
-  opacity: 0.25;
-  line-height: 1;
-}
-.booking-placeholder-title {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--silver);
-}
-.booking-placeholder-sub {
-  font-size: 0.85rem;
-  color: var(--steel);
-  max-width: 280px;
-  line-height: 1.65;
-}
-.booking-note {
-  font-size: 0.75rem;
-  color: var(--steel);
-  margin-top: 1.5rem;
-  line-height: 1.65;
-  text-align: center;
-}
-.booking-note strong { color: var(--muted); }
-
-/* === CONTACT PAGE === */
-.contact-section { background: var(--black); }
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
-  align-items: start;
-}
-
-.contact-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.contact-card {
-  display: flex;
-  gap: 1.1rem;
-  align-items: flex-start;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 1.25rem 1.5rem;
-}
-.contact-icon-tile {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: var(--red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  color: var(--ink);
-}
-.contact-card-label {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 600;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--steel);
-  margin-bottom: 0.25rem;
-}
-.contact-card-value {
-  font-size: 0.9rem;
-  color: var(--ink);
-  line-height: 1.6;
-}
-.contact-card-value a {
-  color: var(--ink);
-  transition: color var(--ease);
-}
-.contact-card-value a:hover { color: var(--red-bright); }
-
-/* Contact form */
-.contact-form-wrap {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 2.5rem;
-  position: relative;
-}
-.contact-form-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--red), var(--red-bright));
-}
-
+/* === FORM FIELDS (booking modal) === */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -925,7 +644,6 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   color: var(--muted);
 }
 .form-input,
-.form-select,
 .form-textarea {
   background: var(--panel-2);
   border: 1px solid var(--line);
@@ -940,19 +658,9 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   -webkit-appearance: none;
 }
 .form-input:focus,
-.form-select:focus,
 .form-textarea:focus { border-color: var(--red-bright); }
 .form-input::placeholder,
 .form-textarea::placeholder { color: var(--steel); }
-
-.form-select {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%237c8089' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: 2.5rem;
-}
-.form-select option { background: var(--panel-2); color: var(--ink); }
 
 .form-textarea { resize: vertical; min-height: 120px; }
 
@@ -997,38 +705,242 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
     transform: none;
     transition: none;
   }
-  .card::before  { transition: none; }
-  .btn:hover     { transform: none; }
+  .btn:hover { transform: none; }
 }
 
 /* === RESPONSIVE === */
+
+/* Largest breakpoint — let a sliver of the Process section peek in at
+   the bottom of the viewport on load, as a hint there's more below. */
+@media (min-width: 1601px) {
+  .hero { min-height: calc(100svh - 90px); }
+
+  .hero-logo img { height: 56px; }
+
+  /* Keep "Your first session" / "is on me." as two lines, not three —
+     at this font-size the first line otherwise wraps on its own. */
+  .cta-band-headline--split { white-space: nowrap; }
+}
+
+/* Midsize / laptop breakpoint — matches the Figma "midsize" frame
+   (authored at 1444px). The nav stays a single right-aligned row until
+   it starts crowding the hero photo (see the 920px breakpoint below).
+   The headline/CTA band scale down to the design's smaller proportions. */
+@media (max-width: 1600px) {
+  /* Same peek of the next section at the bottom of the viewport as the
+     largest breakpoint. */
+  .hero { min-height: calc(100svh - 90px); }
+
+  /* Logo stays the same larger size as the largest breakpoint here —
+     it doesn't need to shrink until a narrower breakpoint. */
+  .hero-logo img { height: 56px; }
+
+  .hero-inner-2 {
+    padding-left: clamp(2rem, 29vw, 22rem);
+  }
+  .hero-headline-2 { font-size: clamp(2.5rem, 8.2vw, 7.5rem); }
+
+  /* Midsize wedge photo — box height is pinned to the full hero height
+     (top/bottom 0) and width is derived from the image's own aspect
+     ratio instead of a fixed % of viewport width. A width-percentage
+     box drifts out of ratio with the image as the window gets narrower
+     without getting shorter, which forced object-fit to either crop
+     into the baked-in diagonal (cover) or shrink the photo short of
+     the section's full height (contain). Matching the box's ratio to
+     the image's exactly means it always fills top-to-bottom with no
+     crop and no gap, regardless of window shape. */
+  .hero-photo-wedge {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: -13.07%;
+    aspect-ratio: 2597 / 2901;
+  }
+
+  /* Keep "Your first session" / "is on me." as two lines here too. */
+  .cta-band-headline--split {
+    font-size: clamp(2.25rem, 6.5vw, 4.75rem);
+    white-space: nowrap;
+  }
+}
+
+/* Some overlap between the nav links and the hero photo is fine — it's
+   only once the leftmost link (Process) would actually reach the
+   photo's diagonal edge that the row stops working. Measured against
+   the running site: that happens around 1200px, well below the 1600px
+   midsize breakpoint. Below this, drop the links under the logo
+   instead of letting them collide with the photo. */
+@media (max-width: 1200px) {
+  .hero-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    /* Shrink-wrap to the logo's width (the widest child) and keep that
+       block flush with the right edge, so centering the links row below
+       is relative to the logo, not the full viewport width. */
+    left: auto;
+    width: fit-content;
+    padding-left: 0;
+  }
+  .hero-logo { order: -1; }
+}
+
+/* Smallest breakpoint — matches the Figma "small" frame (authored at
+   971px). No more side wedge photo at all; the hero becomes a centered
+   black panel — logo, then nav row, then headline, then CTAs, all
+   centered on the full viewport width instead of tucked under the
+   logo on the right. */
+@media (max-width: 970px) {
+  /* Logo left, hamburger right — replaces the wider breakpoints'
+     centered logo-over-links stack (see .hero-nav-links / .hero-hamburger
+     display swap below). */
+  .hero-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    left: 0;
+    width: auto;
+    padding-left: var(--gutter);
+  }
+  .hero-nav-links { display: none; }
+  .hero-hamburger { display: flex; }
+
+  .hero-photo-wedge { display: none; }
+  .hero-photo-band  { display: block; }
+  /* Stack .hero-inner-2 and .hero-photo-band vertically (the row default
+     would otherwise sit them side by side). */
+  .hero { flex-direction: column; }
+
+  .hero-inner-2 {
+    padding-left: clamp(1rem, 6.18vw, 3rem);
+    padding-right: clamp(1rem, 3.91vw, 2rem);
+  }
+  /* Same staggered per-line composition as the wider breakpoints — the
+     Figma small frame keeps it, it's not a plain centered block. */
+  .hero-headline-2 { font-size: clamp(2rem, 11.18vw, 6.8rem); }
+  .hero-ctas {
+    justify-content: center;
+    gap: 1.45rem;
+  }
+}
+
 @media (max-width: 960px) {
-  .cards-grid         { grid-template-columns: repeat(2, 1fr); }
-  .testimonials-grid  { grid-template-columns: repeat(2, 1fr); }
+  /* Straight from 3 columns to 1 — a 2-then-1 intermediate step leaves
+     the third card orphaned alone on its own row. */
+  .process-grid       { grid-template-columns: 1fr; }
   .two-col            { grid-template-columns: 1fr; }
   .about-photo-wrap   { display: none; }
+  .about-photo-band   { display: block; order: -1; }
   .footer-grid        { grid-template-columns: 1fr 1fr; }
-  .schedule-grid      { grid-template-columns: 1fr; }
-  .contact-grid       { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-  .nav-links   { display: none; }
-  .hamburger   { display: flex; }
-
-  .hero-inner  { grid-template-columns: 1fr; }
-  .hero-portrait { display: none; }
-  .hero-wedge  { width: 100%; right: -25%; opacity: 0.25; }
-
-  .cards-grid        { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
   .footer-grid       { grid-template-columns: 1fr; }
   .form-row          { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .hero-stats  { gap: 1.5rem; }
+  .stats-row   { gap: 1.5rem; }
   .stat-num    { font-size: 2rem; }
-  .booking-box,
-  .contact-form-wrap { padding: 1.5rem; }
+
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; }
+
+  /* Don't let the About Eric band run full width/height at phone size —
+     scale it down and center it instead. */
+  .about-photo-band {
+    max-width: 280px;
+    margin-inline: auto;
+  }
+}
+
+/* ============================================================
+   BOOKING MODAL — quick lead form used by every "free assessment"
+   CTA. Centered overlay on wide viewports; full-screen sheet below
+   768px (same mobile threshold used everywhere else on the site).
+============================================================ */
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.booking-modal.open { display: flex; }
+
+.booking-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.82);
+  backdrop-filter: blur(2px);
+}
+
+.booking-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  animation: booking-modal-in 0.22s ease;
+}
+.booking-modal-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--red-bright));
+}
+
+@keyframes booking-modal-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.booking-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color var(--ease);
+}
+.booking-modal-close:hover { color: var(--red-bright); }
+.booking-modal-close:focus-visible { outline: 2px solid var(--red-bright); outline-offset: 2px; }
+
+.booking-modal-heading {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  margin-bottom: 1.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-modal-panel { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .booking-modal { padding: 0; }
+  .booking-modal-panel {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border: none;
+    padding: 5.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: none;
+  }
+  .booking-modal-close { top: 1.5rem; }
 }

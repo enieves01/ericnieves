@@ -1,51 +1,41 @@
 /* ============================================================
-   MAIN.JS — shared across all pages
+   MAIN.JS
    ============================================================ */
 
-/* --- Hamburger / mobile nav -----------------------------------
-   Toggles .open on .mobile-nav and manages aria-expanded.
-   Also closes on Escape key and on any link click.
+/* --- Hamburger / mobile menu ------------------------------------
+   Toggles .open on #mobile-menu and aria-expanded on .hero-hamburger
+   (the icon's bars-to-X morph is pure CSS, keyed off aria-expanded).
+   Closes on Escape, on any menu link click, or the button itself.
 ---------------------------------------------------------------- */
 ;(function () {
-  const hamburger = document.querySelector('.hamburger');
-  const mobileNav = document.querySelector('.mobile-nav');
-  if (!hamburger || !mobileNav) return;
+  const button = document.querySelector('.hero-hamburger');
+  const menu   = document.getElementById('mobile-menu');
+  if (!button || !menu) return;
 
   function close() {
-    hamburger.setAttribute('aria-expanded', 'false');
-    mobileNav.classList.remove('open');
+    button.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+  button.addEventListener('click', () => {
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
     if (isOpen) {
       close();
     } else {
-      hamburger.setAttribute('aria-expanded', 'true');
-      mobileNav.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+      menu.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
   });
 
-  mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
       close();
-      hamburger.focus();
+      button.focus();
     }
-  });
-})();
-
-/* --- Active nav link ------------------------------------------
-   Marks the link whose href matches the current page filename.
----------------------------------------------------------------- */
-;(function () {
-  const page = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
-    const href = (link.getAttribute('href') || '').split('#')[0] || 'index.html';
-    if (href === page) link.classList.add('active');
   });
 })();
 
@@ -83,18 +73,73 @@
   targets.forEach(el => observer.observe(el));
 })();
 
-/* --- Contact form (front-end demo) ----------------------------
-   Prevents default submit, shows a confirmation message, and
-   resets the form. Wiring to a real backend is done separately
-   (see comment in contact.html).
+/* --- Booking modal ---------------------------------------------
+   Every "free assessment" CTA (marked with [data-booking-trigger])
+   opens this modal. The href is left in place as a no-JS fallback
+   (a plain mailto: link). Submitting builds a mailto: link from the
+   form fields so the visitor's own email app sends the request
+   straight to Eric; no backend required.
 ---------------------------------------------------------------- */
 ;(function () {
-  const form         = document.getElementById('contact-form');
-  const confirmation = document.getElementById('form-confirmation');
-  if (!form || !confirmation) return;
+  const modal        = document.getElementById('booking-modal');
+  const form         = document.getElementById('booking-form');
+  const confirmation = document.getElementById('booking-form-confirmation');
+  const triggers     = document.querySelectorAll('[data-booking-trigger]');
+  if (!modal || !form || !triggers.length) return;
+
+  const closers = modal.querySelectorAll('[data-booking-close]');
+  let lastFocused = null;
+
+  function open(e) {
+    e.preventDefault();
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const firstField = form.querySelector('input, textarea');
+    if (firstField) firstField.focus();
+  }
+
+  function close() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  triggers.forEach(trigger => trigger.addEventListener('click', open));
+  closers.forEach(el => el.addEventListener('click', close));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) close();
+  });
 
   form.addEventListener('submit', e => {
     e.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const name    = form.querySelector('#booking-name').value.trim();
+    const phone   = form.querySelector('#booking-phone').value.trim();
+    const email   = form.querySelector('#booking-email').value.trim();
+    const message = form.querySelector('#booking-message').value.trim();
+
+    const subject = `Free assessment request — ${name}`;
+    const body = [
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email}`,
+      '',
+      'Message:',
+      message || '(none)'
+    ].join('\n');
+
+    const mailto = `mailto:eric@ericnievescoaching.com`
+      + `?subject=${encodeURIComponent(subject)}`
+      + `&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+
     confirmation.classList.add('visible');
     form.reset();
     confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

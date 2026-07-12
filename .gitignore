@@ -12,3 +12,7 @@
 
 # Misc
 Thumbs.db
+
+# Local working files — not part of the deployed site
+/QA/
+/resources/

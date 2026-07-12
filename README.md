@@ -1,6 +1,6 @@
 # Eric Nieves Coaching — Website
 
-Marketing site for Eric Nieves, personal trainer in the Lake Norman area of Charlotte, NC. Static HTML/CSS/JS — no build step, no framework. Deploys to Vercel or Netlify as-is.
+Marketing site for Eric Nieves, personal trainer in the Lake Norman area of Charlotte, NC. Single-page static HTML/CSS/JS — no build step, no framework. Deploys to Vercel or Netlify as-is.
 
 ---
 
@@ -9,11 +9,9 @@ Marketing site for Eric Nieves, personal trainer in the Lake Norman area of Char
 ```
 eric-nieves-coaching/
 ├── assets/                 ← Drop logo & photo files here (see below)
-├── index.html              ← Home page
-├── schedule.html           ← Book a session
-├── contact.html            ← Contact form
-├── style.css               ← All styles + CSS variables (shared)
-├── main.js                 ← Hamburger nav, scroll reveal, contact form (shared)
+├── index.html              ← The entire site (one page)
+├── style.css               ← All styles + CSS variables
+├── main.js                 ← Scroll reveal, booking modal
 └── README.md
 ```
 
@@ -41,8 +39,8 @@ Drop the following files into `assets/`. The HTML already references these exact
 
 | File | Where it's used |
 |---|---|
-| `assets/logo-header.png` | Sticky header on every page |
-| `assets/logo-stacked.png` | Footer on every page |
+| `assets/logo-header.png` | Nav, inside the hero |
+| `assets/logo-stacked.png` | Footer |
 | `assets/logo-circle.png` | Spare (not currently placed) |
 | `assets/portrait-hero.jpg` | Hero section on the home page |
 | `assets/portrait-about.jpg` | About section on the home page |
@@ -51,34 +49,13 @@ Each `<img>` has an `onerror` fallback that shows a text version of the logo if 
 
 ---
 
-## Wiring up the contact form
+## Booking / contact flow
 
-The form in `contact.html` is currently front-end only — it shows a confirmation message but doesn't send data anywhere. The full TODO comment is in `contact.html` above the `<form>` tag. Short version:
+Every "free assessment" CTA (`[data-booking-trigger]`) opens a modal (`#booking-modal` in `index.html`, logic in `main.js`) instead of navigating anywhere — a centered overlay above 768px, full-screen below it. Name, phone, email, and message go into a `mailto:` link built at submit time, which hands off to the visitor's own email app addressed to `eric@ericnievescoaching.com`. No backend, form service, or account signup required.
 
-**Formspree (easiest):**
-1. Create a form at [formspree.io](https://formspree.io) (free tier available).
-2. Replace `action="#"` on the form with your Formspree endpoint.
-3. Change `method` to `POST`.
-4. Remove or update the `e.preventDefault()` in `main.js`.
+Each trigger keeps its `href` as a plain `mailto:` link too, so the CTA still works if JavaScript fails to load.
 
-**Netlify Forms (if hosting on Netlify):**
-1. Add `netlify` attribute to the `<form>` tag.
-2. Add `<input type="hidden" name="form-name" value="contact">`.
-3. Netlify picks it up automatically on deploy — no backend code needed.
-
----
-
-## Adding the Square booking calendar
-
-The booking box in `schedule.html` holds a placeholder until Square Appointments is connected. The full comment block with both embed formats is inside `schedule.html` — search for `TODO: SQUARE APPOINTMENTS EMBED`.
-
-**If you're on a paid Square Appointments plan**, paste the widget script or iframe where indicated.
-
-**If you're on the free plan**, update the `href` on the "Open booking page" button to your Square-hosted booking URL:
-```
-https://book.squareup.com/appointments/YOUR_BOOKING_LINK/location/YOUR_LOCATION_ID/services
-```
-Find this URL in Square Dashboard → Appointments → Online Booking → Booking Website.
+To point submissions somewhere else, change the address in the `mailto:` template literal inside the booking-modal `submit` handler in `main.js`.
 
 ---
 
@@ -103,6 +80,6 @@ No `vercel.json` or `netlify.toml` is required for a plain static site.
 ## Brand & design notes
 
 - **Colors:** defined as CSS variables in `:root` inside `style.css`. Change `--red` / `--red-bright` to tweak the crimson accent globally.
-- **Fonts:** loaded from Google Fonts — Saira Condensed (display), Oswald (labels/nav), Inter (body).
+- **Fonts:** loaded from Google Fonts — Tomorrow (display/headlines), Saira Condensed (secondary display), Oswald (labels/nav), Inter (body).
 - **Scroll animations:** `IntersectionObserver` adds `.in` to `.reveal` / `.reveal-left` / `.reveal-right` elements. Automatically disabled when `prefers-reduced-motion` is set.
-- **Mobile breakpoints:** hamburger nav activates at `≤768px`; portrait images hide at `≤768px`; two-column layouts collapse at `≤960px`.
+- **Mobile breakpoints:** the hero's side photo reflows into a full-width band and the nav centers below `≤970px`; portrait images hide and two-column layouts collapse at `≤960px`; the booking modal goes full-screen at `≤768px`.

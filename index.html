@@ -10,61 +10,10 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- ============================================================
-       HEADER
-  ============================================================ -->
-  <header class="site-header" role="banner">
-    <div class="header-inner">
-
-      <a href="index.html" class="logo-link" aria-label="Eric Nieves Coaching — Home">
-        <img
-          src="assets/logo-header.png"
-          alt="Eric Nieves Coaching"
-          height="42"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-        >
-        <!-- Text fallback until logo asset is added -->
-        <span class="logo-text" style="display:none">
-          ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
-        </span>
-      </a>
-
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Results</a>
-        <a href="schedule.html">Schedule</a>
-        <a href="contact.html">Contact</a>
-        <a href="schedule.html" class="btn btn-red">Free Assessment</a>
-      </nav>
-
-      <button
-        class="hamburger"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="mobile-nav"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Mobile nav drawer -->
-  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <a href="index.html">Home</a>
-    <a href="#about">About</a>
-    <a href="#testimonials">Results</a>
-    <a href="schedule.html">Schedule</a>
-    <a href="contact.html">Contact</a>
-    <a href="schedule.html" class="btn btn-red" style="margin-top:0.5rem">Free Assessment</a>
-  </nav>
 
   <main>
 
@@ -73,100 +22,114 @@
     ============================================================ -->
     <section class="hero" aria-labelledby="hero-headline">
 
-      <!-- Diagonal red wedge — visual motif, decorative -->
-      <div class="hero-wedge" aria-hidden="true"></div>
+      <!-- Diagonal wedge portrait, pre-clipped -->
+      <div class="hero-photo-wedge" aria-hidden="true">
+        <img src="assets/hero-photo-wedge.png" alt="">
+      </div>
       <!-- Diagonal pinstripe texture overlay -->
       <div class="pinstripe" aria-hidden="true"></div>
 
-      <div class="hero-inner container">
+      <!-- Nav lives inside the hero, not a separate sticky header -->
+      <div class="hero-nav">
+        <nav class="hero-nav-links" aria-label="Main navigation">
+          <a href="#process">Process</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-        <!-- TEXT COLUMN -->
-        <div class="hero-text">
-          <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Lake Norman · Charlotte, NC</p>
+        <a href="index.html" class="hero-logo" aria-label="Eric Nieves Coaching — Home">
+          <img
+            src="assets/logo-header.png"
+            alt="Eric Nieves Coaching"
+            height="42"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+          >
+          <!-- Text fallback until logo asset is added -->
+          <span class="logo-text" style="display:none">
+            ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
+          </span>
+        </a>
 
-          <h1 id="hero-headline" class="display hero-headline">
-            Build the body<br>that <span class="accent">won't quit.</span>
-          </h1>
+        <!-- Smallest breakpoint only: replaces .hero-nav-links with a
+             hamburger that opens #mobile-menu. Icon morphs to an X via
+             the aria-expanded attribute (see style.css). -->
+        <button
+          type="button"
+          class="hero-hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hero-hamburger-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
 
-          <p class="hero-sub">
-            Personal training and coaching for people who are done starting over.
-            Eric Nieves builds you a plan around your life, your goals, and the way
-            your body actually moves — then keeps you accountable until it's done.
-          </p>
+      <!-- Full-screen menu overlay, toggled by .hero-hamburger above
+           (smallest breakpoint only — see main.js). -->
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-          <div class="hero-ctas">
-            <a href="schedule.html" class="btn btn-red">Book a free assessment</a>
-            <a href="#about"        class="btn btn-ghost">Meet Eric</a>
-          </div>
+      <div class="hero-inner-2">
+        <h1 id="hero-headline" class="display-alt hero-headline-2">
+          <span class="ln">Build the</span>
+          <span class="ln ln-shift">body that</span>
+          <span class="ln accent">won't quit.</span>
+        </h1>
 
-          <div class="hero-stats" aria-label="Coaching statistics">
-            <div>
-              <div class="stat-num" aria-label="12 plus">12+</div>
-              <div class="stat-label">Years coaching</div>
-            </div>
-            <div>
-              <div class="stat-num" aria-label="400 plus">400+</div>
-              <div class="stat-label">Clients trained</div>
-            </div>
-            <div>
-              <div class="stat-num">1:1</div>
-              <div class="stat-label">Always personal</div>
-            </div>
-          </div>
+        <div class="hero-ctas">
+          <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Book a free assessment</span></a>
+          <a href="#about"        class="btn btn-ghost btn-skew"><span class="btn-label">About Eric</span></a>
         </div>
+      </div>
 
-        <!-- PORTRAIT COLUMN (hidden on mobile) -->
-        <div class="hero-portrait" aria-hidden="true">
-          <div class="portrait-frame">
-            <img
-              src="assets/portrait-hero.jpg"
-              alt=""
-              class="portrait-img"
-            >
-            <div class="portrait-tag">Eric Nieves · Head Coach</div>
-          </div>
-        </div>
-
+      <!-- Small breakpoint: photo reflows into a plain full-bleed landscape
+           band below the CTAs (no diagonal/skew, per the Figma small frame).
+           Lives outside .hero-inner-2 so it isn't constrained by its side
+           padding and can run the full width of the viewport. -->
+      <div class="hero-photo-band" aria-hidden="true">
+        <img src="assets/hero-photo-band-small.jpg" alt="">
       </div>
     </section>
 
     <!-- ============================================================
-         APPROACH
+         PROCESS
     ============================================================ -->
-    <section class="approach" id="approach" aria-labelledby="approach-heading">
+    <section class="process" id="process" aria-labelledby="process-heading">
       <div class="container">
 
-        <div class="section-header reveal">
-          <p class="eyebrow"><span class="rule" aria-hidden="true"></span>How it works</p>
-          <h2 id="approach-heading" class="display section-headline">Coaching that earns its keep</h2>
-        </div>
+        <h2 id="process-heading" class="display-alt section-headline-2 reveal">The process</h2>
 
-        <div class="cards-grid">
+        <div class="process-grid">
 
-          <article class="card reveal">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 class="card-title">Assess</h3>
-            <p class="card-body">
+          <article class="process-card reveal">
+            <span class="process-num" aria-hidden="true">01</span>
+            <h3 class="process-title">Assess</h3>
+            <p class="process-body">
               We start with a free movement screen and a real conversation about your
               history, your goals, and what's gotten in the way before. No judgment —
               just a starting line.
             </p>
           </article>
 
-          <article class="card reveal">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 class="card-title">Build</h3>
-            <p class="card-body">
+          <article class="process-card reveal">
+            <span class="process-num" aria-hidden="true">02</span>
+            <h3 class="process-title">Build</h3>
+            <p class="process-body">
               You get a program built for your body and your schedule — strength,
               conditioning, and recovery that fit a real life, not a magazine cover.
               Adjusted week to week.
             </p>
           </article>
 
-          <article class="card reveal">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 class="card-title">Deliver</h3>
-            <p class="card-body">
+          <article class="process-card reveal">
+            <span class="process-num" aria-hidden="true">03</span>
+            <h3 class="process-title">Deliver</h3>
+            <p class="process-body">
               Show up and put in the work. Eric handles the coaching, the form
               checks, and the accountability so all you have to bring is effort.
               Results follow.
@@ -184,21 +147,9 @@
       <div class="container">
         <div class="two-col">
 
-          <!-- Photo (hidden on tablet/mobile via CSS) -->
-          <div class="about-photo-wrap reveal-left" aria-hidden="true">
-            <img
-              src="assets/portrait-about.jpg"
-              alt=""
-              class="about-photo"
-            >
-          </div>
-
           <!-- Text -->
-          <div class="reveal-right">
-            <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Your coach</p>
-            <h2 id="about-heading" class="display about-headline">
-              Coach. Lifter.<br>In your corner.
-            </h2>
+          <div class="reveal-left">
+            <h2 id="about-heading" class="display-alt section-headline-2">About Eric</h2>
 
             <div class="about-body">
               <p>
@@ -211,109 +162,36 @@
               <p>
                 His style is simple: <strong>meet you where you are, push you a little further
                 than you'd push yourself, and never let the plan get more complicated than it
-                needs to be.</strong> Whether you're chasing your first pull-up, rebuilding after
-                an injury, or trying to drop weight for good, you'll get a coach who actually
-                pays attention.
-              </p>
-              <p>
-                He trains clients in person around Lake Norman and online anywhere — same
-                attention, same standards.
+                needs to be.</strong> He trains clients in person around Lake Norman and online
+                anywhere — same attention, same standards.
               </p>
             </div>
 
-            <div class="chips" aria-label="Credentials">
-              <span class="chip">NASM Certified</span>
-              <span class="chip">Precision Nutrition L1</span>
-              <span class="chip">Strength &amp; Conditioning</span>
-              <span class="chip">Corrective Exercise</span>
+            <div class="stats-row" aria-label="Coaching statistics">
+              <div>
+                <div class="stat-num" aria-label="12 plus">12+</div>
+                <div class="stat-label">Years coaching</div>
+              </div>
+              <div>
+                <div class="stat-num" aria-label="400 plus">400+</div>
+                <div class="stat-label">Clients trained</div>
+              </div>
+              <div>
+                <div class="stat-num">1:1</div>
+                <div class="stat-label">Always personal</div>
+              </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
+          <!-- Photo (hidden on tablet/mobile via CSS) -->
+          <div class="about-photo-wrap reveal-right" aria-hidden="true">
+            <img src="assets/about-photo-wedge.png" alt="" class="about-photo">
+          </div>
 
-    <!-- ============================================================
-         TESTIMONIALS
-    ============================================================ -->
-    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
-      <div class="container">
-
-        <div class="section-header reveal">
-          <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Real results</p>
-          <h2 id="testimonials-heading" class="display section-headline">What clients say</h2>
-        </div>
-
-        <div class="testimonials-grid">
-
-          <!-- Testimonial 1 -->
-          <article class="testimonial-card reveal">
-            <span class="quote-mark" aria-hidden="true">"</span>
-            <div class="stars" aria-label="5 out of 5 stars">
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <blockquote class="testimonial-quote">
-              "Eric got me down 38 pounds and stronger than I've ever been — at 47. He never
-              made me feel like a beginner. He just kept me moving forward."
-            </blockquote>
-            <div class="testimonial-author">
-              <div class="author-avatar" aria-hidden="true">M</div>
-              <div>
-                <div class="author-name">Marcus T.</div>
-                <div class="author-location">Cornelius, NC</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Testimonial 2 -->
-          <article class="testimonial-card reveal">
-            <span class="quote-mark" aria-hidden="true">"</span>
-            <div class="stars" aria-label="5 out of 5 stars">
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <blockquote class="testimonial-quote">
-              "I came in after a back injury terrified of lifting again. Eric rebuilt my
-              confidence rep by rep. I'm deadlifting pain-free for the first time in years."
-            </blockquote>
-            <div class="testimonial-author">
-              <div class="author-avatar" aria-hidden="true">D</div>
-              <div>
-                <div class="author-name">Dana R.</div>
-                <div class="author-location">Davidson, NC</div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Testimonial 3 -->
-          <article class="testimonial-card reveal">
-            <span class="quote-mark" aria-hidden="true">"</span>
-            <div class="stars" aria-label="5 out of 5 stars">
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <blockquote class="testimonial-quote">
-              "I've had trainers who counted reps and looked at their phone. Eric actually
-              coaches. The online programming is just as dialed-in as the in-person sessions."
-            </blockquote>
-            <div class="testimonial-author">
-              <div class="author-avatar" aria-hidden="true">J</div>
-              <div>
-                <div class="author-name">Jordan P.</div>
-                <div class="author-location">Huntersville, NC</div>
-              </div>
-            </div>
-          </article>
+          <!-- Mobile-only: photo reflows into a horizontal skewed band above the text -->
+          <div class="about-photo-band" aria-hidden="true">
+            <img src="assets/mobile-about-photo.png" alt="">
+          </div>
 
         </div>
       </div>
@@ -325,12 +203,10 @@
     <section class="cta-band" aria-labelledby="cta-heading">
       <div class="cta-band-texture" aria-hidden="true"></div>
       <div class="container cta-band-inner">
-        <p class="cta-band-eyebrow">Get started</p>
-        <h2 id="cta-heading" class="display cta-band-headline">Your first session is on me.</h2>
-        <p class="cta-band-sub">
-          Book a free assessment — no pressure, no contract. Let's see if we're a fit.
-        </p>
-        <a href="schedule.html" class="btn btn-white">Book your free assessment</a>
+        <h2 id="cta-heading" class="display-alt cta-band-headline cta-band-headline--split">
+          Your first session<br class="cta-break"> <span class="muted-black">is on me.</span>
+        </h2>
+        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Book a free assessment</span></a>
       </div>
     </section>
 
@@ -339,15 +215,15 @@
   <!-- ============================================================
        FOOTER
   ============================================================ -->
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer" id="contact" role="contentinfo">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid footer-grid--simple">
 
         <!-- Branding -->
         <div>
           <a href="index.html" aria-label="Eric Nieves Coaching — Home">
             <img
-              src="assets/logo-stacked.png"
+              src="assets/logo-header.png"
               alt="Eric Nieves Coaching"
               class="footer-logo-img"
               onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
@@ -364,21 +240,9 @@
           </p>
         </div>
 
-        <!-- Explore -->
-        <div>
-          <p class="footer-col-title">Explore</p>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About Eric</a></li>
-            <li><a href="index.html#testimonials">Client Results</a></li>
-            <li><a href="schedule.html">Schedule a Session</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-
         <!-- Contact -->
         <div>
-          <p class="footer-col-title">Get in touch</p>
+          <p class="display-alt footer-col-title">Contact</p>
 
           <div class="footer-contact-item">
             <!-- Email icon -->
@@ -411,12 +275,103 @@
 
       <div class="footer-bottom">
         <p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p>
-        <p class="footer-copy">Lake Norman · Charlotte, NC</p>
       </div>
     </div>
   </footer>
 
   <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <!-- ============================================================
+       BOOKING MODAL — quick lead form, triggered by every
+       "free assessment" CTA. Submitting opens the visitor's email
+       client with a pre-filled message to Eric (mailto: — no
+       backend required). See main.js for the trigger/submit logic.
+  ============================================================ -->
+  <div class="booking-modal" id="booking-modal" aria-hidden="true">
+    <div class="booking-modal-overlay" data-booking-close></div>
+    <div class="booking-modal-panel" role="dialog" aria-modal="true" aria-labelledby="booking-modal-heading">
+      <button type="button" class="booking-modal-close" data-booking-close aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Free assessment</p>
+      <h2 id="booking-modal-heading" class="display-alt booking-modal-heading">Book your session</h2>
+
+      <form id="booking-form" novalidate aria-label="Book a free assessment">
+
+        <div class="form-group">
+          <label class="form-label" for="booking-name">Name <span aria-hidden="true">*</span></label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-name"
+            name="name"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="booking-phone">Phone <span aria-hidden="true">*</span></label>
+            <input
+              class="form-input"
+              type="tel"
+              id="booking-phone"
+              name="phone"
+              autocomplete="tel"
+              placeholder="(704) 555-0100"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-email">Email <span aria-hidden="true">*</span></label>
+            <input
+              class="form-input"
+              type="email"
+              id="booking-email"
+              name="email"
+              autocomplete="email"
+              placeholder="you@email.com"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-message">Message (optional)</label>
+          <textarea
+            class="form-textarea"
+            id="booking-message"
+            name="message"
+            placeholder="Anything Eric should know before reaching out?"
+          ></textarea>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-red btn-skew">
+            <span class="btn-label">
+              Send request
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- Shown after JS builds the mailto link -->
+        <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">
+          <strong>Almost done.</strong> Your email app should now be open with a message ready to send to Eric.
+          If nothing opened, email him directly at
+          <a href="mailto:eric@ericnievescoaching.com" style="color:var(--red-bright)">eric@ericnievescoaching.com</a>.
+        </div>
+
+      </form>
+    </div>
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>
