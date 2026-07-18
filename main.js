@@ -119,20 +119,27 @@
 
     if (!form.reportValidity()) return;
 
-    const name    = form.querySelector('#booking-name').value.trim();
-    const phone   = form.querySelector('#booking-phone').value.trim();
-    const email   = form.querySelector('#booking-email').value.trim();
-    const message = form.querySelector('#booking-message').value.trim();
+    const name           = form.querySelector('#booking-name').value.trim();
+    const email          = form.querySelector('#booking-email').value.trim();
+    const phone          = form.querySelector('#booking-phone').value.trim();
+    const coachingOption = form.querySelector('#booking-coaching-option').value.trim();
+    const goal           = form.querySelector('#booking-goal').value.trim();
+    const injuries       = form.querySelector('#booking-injuries').value.trim();
+    const schedule       = form.querySelector('#booking-schedule').value.trim();
 
     const subject = `Free assessment request — ${name}`;
-    const body = [
+
+    const lines = [
       `Name: ${name}`,
-      `Phone: ${phone}`,
       `Email: ${email}`,
-      '',
-      'Message:',
-      message || '(none)'
-    ].join('\n');
+      `Phone: ${phone}`
+    ];
+    if (coachingOption) lines.push(`Preferred coaching option: ${coachingOption}`);
+    if (goal)           lines.push(`Primary fitness goal: ${goal}`);
+    if (injuries)       lines.push(`Previous injuries or limitations: ${injuries}`);
+    if (schedule)       lines.push(`Preferred training days and times: ${schedule}`);
+
+    const body = lines.join('\n');
 
     const mailto = `mailto:eric@ericnievescoaching.com`
       + `?subject=${encodeURIComponent(subject)}`

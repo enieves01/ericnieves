@@ -33,7 +33,7 @@ block at the very end of the file). Nothing outside this list changes layout.
 | `max-width: 1200px` | nav collision point | `.hero-nav` switches from a single right-aligned row to a column (logo on top via `order:-1`, links row centered below) — this is where the nav links would otherwise start overlapping the diagonal photo edge. |
 | `max-width: 970px` | **smallest — Figma "small" frame** (authored 971px) | Hero fully restructures: `.hero-nav` back to a row (logo left, hamburger right); `.hero-nav-links` hidden, `.hero-hamburger` shown; `.hero-photo-wedge` hidden, `.hero-photo-band` (plain diagonal-top band) shown; `.hero` flex direction becomes `column` so the band stacks under the text instead of beside it; `.hero-inner-2` side padding shrinks; `.hero-headline-2` shrinks further; `.hero-support` drops its width cap/right margin (full width) and `.hero-ctas` centers instead of right-aligning. |
 | `max-width: 960px` | tablet/grid collapse | `.process-grid` 3 cols → 1 col (also used by Coaching Options). `.who-grid` (Who I Help, 4 items) → 2 cols. `.two-col` (About) 2 cols → 1 col. `.about-photo-wrap` (diagonal wedge photo) hidden; `.about-photo-band` (mobile band) shown, reordered to `order:-1` (above the text). `.footer-grid` 3 cols → 2 cols. |
-| `max-width: 768px` | mobile | `.footer-grid` → 1 col. `.form-row` (booking modal Phone/Email pair) → 1 col. `.who-grid` (Who I Help) → 1 col. Booking modal switches from a centered overlay panel to a full-screen sheet (`.booking-modal` padding removed; `.booking-modal-panel` becomes `width:100%; height:100%`, no border, entry animation disabled). |
+| `max-width: 768px` | mobile | `.footer-grid` → 1 col. `.form-row` (booking modal Email/Phone pair) → 1 col. `.who-grid` (Who I Help) → 1 col. Booking modal switches from a centered overlay panel to a full-screen sheet (`.booking-modal` padding removed; `.booking-modal-panel` becomes `width:100%; height:100%`, no border, entry animation disabled — `overflow-y:auto` carries over from the base rule, so the now-7-field form still scrolls correctly inside it even with `justify-content:center` centering the panel's flex column). |
 | `max-width: 480px` | phone | `.hero-ctas` stacks vertically and buttons go full-width (`.btn { width:100% }`). `.about-photo-band` capped at `max-width:280px` and centered (down from 320px at the 960px tier). |
 
 **Rule of thumb for new sections:** collapse any 2-or-3-column grid to 1
@@ -67,6 +67,9 @@ Note: About's `<h2>` is NOT inside `.two-col` — it's a full-width sibling
 above it (`#about-heading`, own size/spacing override, see §5). Only the
 bio text + credentials sit in the left `.two-col` column now (the old
 stats row — 12+/400+/1:1 — was removed entirely, CSS and markup both).
+The FAQ accordion (`.faq`, see §4) is also a full-width sibling, placed
+directly after `.two-col` closes — still "under Credentials" in visual
+order, just not squeezed into the half-width text column.
 
 ### `.process-grid` — 3-up card grid
 ```css
@@ -239,10 +242,11 @@ any new full-bleed dark or red section that wants the same textured feel.
 | `.process-card` | Card treatment for **red** sections (`rgba(18,18,20,0.33)` translucent, `--radius-lg`) — `.process-num` (big number, Process only) + `.process-title` + `.process-body`. Reused as-is by Who I Help (no numbers, same title/body classes) since it also sits on a red section. |
 | `.who-card` | Card treatment for **black** sections (flat `--card-dark`, no border, `--radius-lg`) — `.who-card-title` + `.who-card-body`. Currently only consumed by Coaching Options. |
 | `.credential-list` / `.credential-chip` | Flat `--chip-dark` tag list (no border), used for the About section's Credentials row. |
+| `.faq` / `.faq-item` / `.faq-question` / `.faq-answer` | FAQ accordion, in the About section below `.two-col`. Native `<details>`/`<summary>` (no JS) — `.faq-item` is the `<details>`, `.faq-question` the `<summary>` (with a `.faq-icon` chevron that rotates via `.faq-item[open] .faq-icon`), `.faq-answer` a plain `<p>`. Items use the same flat `--card-dark`/`--radius-lg` treatment as `.who-card`, since it's also a card-on-black context. |
 | `.cta-band` | Full-bleed red (`--red-bright`) band component: `.cta-band-texture` (pinstripe, §3D) + `.cta-band-inner` (centered content) + `.cta-band-headline` (or the bigger `--split` modifier used on the home page, with a `.muted-black` inline span for two-tone text) + optional `.cta-band-sub` paragraph. |
 | `.hero-support` | Width-capped (`max-width:43.5rem`), right-flush column wrapping the hero's `.section-intro` paragraph + `.hero-ctas` button row. See §3. |
 | `.footer-contact-item` | Icon + text row (SVG icon, `flex-shrink:0`) used for each contact line in the footer. |
-| `.form-group` / `.form-label` / `.form-input` / `.form-textarea` | Booking modal form field pattern — label above input, dark panel background, red focus border. |
+| `.form-group` / `.form-label` / `.form-input` / `.form-textarea` / `.form-select` | Booking modal form field pattern — label above input, dark panel background, red focus border. `.form-select` layers onto `.form-input` (same class list, e.g. `class="form-input form-select"`) to add a custom chevron and `appearance:none` on `<select>` elements. |
 | `.reveal` / `.reveal-left` / `.reveal-right` | Scroll-in animation classes (see §6) — apply to any element that should fade/slide in on scroll; not tied to a specific section. |
 
 ---
@@ -330,9 +334,10 @@ which is also *why* it no longer wraps: it was moved to sit full-width above
 - Entire behavior is skipped (script returns early) if `prefers-reduced-motion: reduce` — matching the CSS's own reduced-motion override that shows everything at full opacity with no transition.
 
 ### Booking modal
-- Trigger: any element with `[data-booking-trigger]` (currently the two "Book a free assessment" CTAs in the hero and CTA band, plus implicitly the modal's own submit button is inside the modal, not a trigger).
+- Trigger: any element with `[data-booking-trigger]` (the hero, Coaching Options, and CTA band "assessment" buttons — 3 total; the modal's own submit button is inside the modal, not a trigger). All three share the exact same visible label, "Schedule my free assessment" — keep them in sync if the label ever changes; nothing derives one from another.
 - `open()`: `preventDefault()`s the link's native `mailto:` navigation, stores `document.activeElement` to restore focus later, adds `.open` + `aria-hidden="false"`, locks body scroll, focuses the form's first field.
 - Close via: overlay click, the × button (`[data-booking-close]`), or `Escape`. Restores focus to whatever triggered the open.
-- Submit: `reportValidity()` gate first (native HTML5 validation on the required Name/Phone/Email fields) → builds a `Subject: Free assessment request — {name}` + plaintext body from the four fields → sets `window.location.href` to a `mailto:eric@ericnievescoaching.com` link (this is the entire "backend" — no server, no form service) → shows `#booking-form-confirmation`, resets the form, scrolls the confirmation into view.
-- No-JS fallback: every trigger keeps a real `mailto:` `href` so the CTA still works if the script fails to load (see README §"Booking / contact flow").
-- To repoint where submissions go, the address is hardcoded in one place: the `mailto:` template literal inside this submit handler (and separately in each trigger's static `href`, and the footer's `mailto:` link, and the confirmation message — four places total if it ever needs to change).
+- Fields: Name / Email / Phone (all `required`), then Preferred coaching option (`<select class="form-input form-select">` — In-Person / Online / Hybrid), Primary fitness goal, Previous injuries or limitations (optional), Preferred training days and times (optional). The three required fields are always in the mailto body; the four non-required fields (coaching option through schedule) are appended only if filled in — each `if (value) lines.push(...)` in the submit handler, so an empty optional field is silently omitted rather than showing an empty line.
+- Submit: `reportValidity()` gate first (native HTML5 validation on the three required fields) → builds a `Subject: Free assessment request — {name}` + plaintext labeled body from whichever fields are filled → sets `window.location.href` to a `mailto:eric@ericnievescoaching.com` link (this is the entire "backend" — no server, no form service) → shows `#booking-form-confirmation`, resets the form, scrolls the confirmation into view.
+- No-JS fallback: every trigger keeps a real `mailto:` `href` so the CTA still works if the script fails to load (see README §"Booking / contact flow"). On top of that, `.booking-modal-email` is a persistent, always-visible (not conditional on submit) selectable email line right under the modal heading — a fallback for visitors whose device has no mail client at all, not just no-JS.
+- To repoint where submissions go, the address is hardcoded in several places: the `mailto:` template literal in the submit handler, each trigger's static `href`, the footer's `mailto:` link, and `.booking-modal-email`'s `href`/text. The confirmation message itself no longer contains the email (see below) — it's a pure status message now.

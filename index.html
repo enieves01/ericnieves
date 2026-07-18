@@ -32,7 +32,7 @@
       <!-- Nav lives inside the hero, not a separate sticky header -->
       <div class="hero-nav">
         <nav class="hero-nav-links" aria-label="Main navigation">
-          <a href="#process">Process</a>
+          <a href="#who-help">Coaching</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -69,7 +69,7 @@
       <!-- Full-screen menu overlay, toggled by .hero-hamburger above
            (smallest breakpoint only — see main.js). -->
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-        <a href="#process">Process</a>
+        <a href="#who-help">Coaching</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -85,7 +85,7 @@
           <p class="section-intro">In-person personal training in Lake Norman and virtual coaching for people who want to build strength, train confidently following previous injuries, and feel better in their bodies.</p>
 
           <div class="hero-ctas">
-            <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Schedule a Free Assessment</span></a>
+            <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
             <a href="#coaching-options" class="btn btn-ghost btn-skew"><span class="btn-label">Explore Coaching Options</span></a>
           </div>
         </div>
@@ -166,7 +166,7 @@
         </div>
 
         <div class="coaching-options-cta">
-          <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Find the Right Coaching Option</span></a>
+          <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
         </div>
 
       </div>
@@ -281,6 +281,65 @@
           </div>
 
         </div>
+
+        <!-- FAQ — native <details>/<summary> so open/close, keyboard (Enter/Space
+             on the summary), and touch all come from the browser for free,
+             no custom JS. -->
+        <div class="faq">
+          <p class="display-alt footer-col-title">Frequently asked questions</p>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary class="faq-question">
+                Where is in-person training located?
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <p class="faq-answer">In-person coaching is available in the Lake Norman area. Exact location details are provided when an assessment is scheduled.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                Do I need previous gym experience?
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <p class="faq-answer">No. Coaching is adapted to your current experience, ability, and comfort level.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                Can I train if I have a previous injury?
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <p class="faq-answer">Training can often be modified around previous injuries and movement limitations. Medical clearance may be requested when appropriate.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                What is included with online coaching?
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <p class="faq-answer">Online coaching includes personalized programming, exercise demonstrations, form review, regular check-ins, cardio and nutrition guidance, and messaging support.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                Is the assessment really free?
+                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </summary>
+              <p class="faq-answer">Yes. The introductory assessment allows us to discuss your goals, evaluate your needs, and determine whether coaching is a good fit.</p>
+            </details>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -294,7 +353,7 @@
           Start with a<br class="cta-break"> <span class="muted-black">free assessment.</span>
         </h2>
         <p class="cta-band-sub">We'll discuss your goals, training history, previous injuries, and current challenges, complete an introductory movement assessment, and determine the best next step for your training.</p>
-        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Schedule My Free Assessment</span></a>
+        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
       </div>
     </section>
 
@@ -385,6 +444,7 @@
 
       <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Free assessment</p>
       <h2 id="booking-modal-heading" class="display-alt booking-modal-heading">Book your session</h2>
+      <p class="booking-modal-email">Prefer email? Reach Eric directly at <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a></p>
 
       <form id="booking-form" novalidate aria-label="Book a free assessment">
 
@@ -403,18 +463,6 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="booking-phone">Phone <span aria-hidden="true">*</span></label>
-            <input
-              class="form-input"
-              type="tel"
-              id="booking-phone"
-              name="phone"
-              autocomplete="tel"
-              placeholder="(704) 555-0100"
-              required
-            >
-          </div>
-          <div class="form-group">
             <label class="form-label" for="booking-email">Email <span aria-hidden="true">*</span></label>
             <input
               class="form-input"
@@ -426,16 +474,61 @@
               required
             >
           </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-phone">Phone <span aria-hidden="true">*</span></label>
+            <input
+              class="form-input"
+              type="tel"
+              id="booking-phone"
+              name="phone"
+              autocomplete="tel"
+              placeholder="(704) 555-0100"
+              required
+            >
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="booking-message">Message (optional)</label>
-          <textarea
-            class="form-textarea"
-            id="booking-message"
-            name="message"
-            placeholder="Anything Eric should know before reaching out?"
-          ></textarea>
+          <label class="form-label" for="booking-coaching-option">Preferred coaching option</label>
+          <select class="form-input form-select" id="booking-coaching-option" name="coaching_option">
+            <option value="" selected>Select an option</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Online">Online</option>
+            <option value="Hybrid (Online + Live Session)">Hybrid (Online + Live Session)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-goal">Primary fitness goal</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-goal"
+            name="goal"
+            placeholder="e.g. Build strength, lose weight, return from injury"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-injuries">Previous injuries or limitations (optional)</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-injuries"
+            name="injuries"
+            placeholder="Anything Eric should know before your assessment?"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-schedule">Preferred training days and times (optional)</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-schedule"
+            name="schedule"
+            placeholder="e.g. Weekday mornings, Tuesday/Thursday evenings"
+          >
         </div>
 
         <div class="form-submit-row">
@@ -451,9 +544,7 @@
 
         <!-- Shown after JS builds the mailto link -->
         <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">
-          <strong>Almost done.</strong> Your email app should now be open with a message ready to send to Eric.
-          If nothing opened, email him directly at
-          <a href="mailto:eric@ericnievescoaching.com" style="color:var(--red-bright)">eric@ericnievescoaching.com</a>.
+          Your request has been received. I'll contact you shortly to discuss your goals and schedule your assessment.
         </div>
 
       </form>
