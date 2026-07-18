@@ -16,9 +16,19 @@
   --red-bright: #c1272d;
   --steel:      #7c8089;
 
+  /* Standardized against the Figma reference (node 26:129) — the design
+     uses exactly one red fill (#c1272d, --red-bright) everywhere, one
+     body-copy color across every paragraph on the page, and two flat
+     "surface" grays for cards/chips sitting on black sections (as
+     opposed to the translucent card treatment used on red sections). */
+  --body-text:  rgba(255, 255, 255, 0.75);
+  --card-dark:  #222226;
+  --chip-dark:  #333339;
+
   --max-w:     1200px;
   --gutter:    clamp(1.25rem, 5vw, 2.5rem);
   --radius:    2px;
+  --radius-lg: 4px;
   --ease:      0.22s ease;
 }
 
@@ -112,11 +122,11 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 .btn:active  { transform: translateY(0); }
 .btn:focus-visible { outline: 2px solid var(--red-bright); outline-offset: 4px; border-radius: 1px; }
 
-.btn-red   { background: var(--red);  color: var(--ink); }
+.btn-red   { background: var(--red-bright);  color: var(--ink); }
 .btn-white { background: var(--ink);  color: var(--black); }
 
 .btn-ghost {
-  background: transparent;
+  background: var(--chip-dark);
   color: var(--ink);
   box-shadow: inset 0 0 0 1.5px var(--line);
 }
@@ -365,54 +375,105 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 }
 .hero-headline-2 .ln { display: block; }
-.hero-headline-2 .ln-shift { margin-left: 1.8em; }
 .hero-headline-2 .accent { color: var(--red-bright); }
+
+/* Support copy + CTAs sit in their own width-capped column, flush to the
+   hero's right edge (matching the nav/headline's right edge) rather than
+   spanning the full remaining hero width — per the Figma reference, this
+   block is deliberately narrower than the headline above it. */
+.hero-support {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 43.5rem;
+  margin-left: auto;
+}
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.875rem;
+  gap: 1rem;
+}
+.hero-ctas .btn { flex: 1 1 0; }
+
+/* === WHO I HELP SECTION ===
+   Per the Figma reference, this section sits on the same red background
+   as .process and reuses its translucent-card treatment exactly (cards
+   below use .process-card/.process-title/.process-body, not a section-
+   specific class). Only the grid stays section-specific: 4 items divide
+   evenly by 2, so unlike .process-grid (which jumps straight from 3
+   columns to 1) this one folds through an intermediate 2x2 tablet step —
+   same two-step breakpoint cadence as .footer-grid (960px → 2 cols,
+   768px → 1 col) rather than inventing a new breakpoint for it. */
+.who-help { background: var(--red-bright); }
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
 }
 
-.stats-row {
-  display: flex;
-  gap: 2.5rem;
-  padding-top: 1.75rem;
-  margin-top: 1.75rem;
-  border-top: 1px solid var(--line);
+/* === COACHING OPTIONS SECTION ===
+   3 cards, so this reuses .process-grid as-is (3-across, straight to 1
+   column at 960px — no 2x2 intermediate, matching the original 3-item
+   rationale). This section sits on black, though, so its cards use a
+   flat --card-dark fill instead of .process-card's translucent-on-red
+   treatment — matching the Figma reference, which uses two distinct
+   card styles depending on whether the section behind them is red or
+   black. .who-card/-title/-body now live here since this is their only
+   remaining consumer after Who I Help switched to .process-card. */
+.coaching-options { background: var(--black); }
+.coaching-options-cta {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
 }
-.stat-num {
-  font-family: 'Tomorrow', sans-serif;
-  font-weight: 900;
-  font-size: 2.6rem;
-  line-height: 1;
-  color: var(--red-bright);
+.who-card {
+  background: var(--card-dark);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
 }
-.stat-label {
+.who-card-title {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.68rem;
+  font-weight: 600;
+  font-size: 1.05rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--steel);
-  margin-top: 0.3rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.who-card-body {
+  font-size: 0.925rem;
+  color: var(--body-text);
+  line-height: 1.72;
 }
 
 /* === PROCESS SECTION (home page redesign) === */
 .process { background: var(--red-bright); }
+/* 44px desktop cap + a flat 24px gap to the intro paragraph below it —
+   both taken directly from the Figma autolayout (heading+intro grouped
+   with a 24px gap; that group to the card grid below is 48px, applied
+   via .process-grid/.who-grid's margin-top instead of here, since
+   .section-intro is shared with Hero, which needs a different gap). */
 .section-headline-2 {
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.25rem, 4.5vw, 2.75rem);
+  margin-bottom: 1.5rem;
 }
+
+/* Standardized intro paragraph directly under a section heading — Hero,
+   Who I Help, Process, and Coaching Options all use this same treatment
+   in the Figma reference. */
+.section-intro { color: var(--body-text); }
 
 .process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 .process-card {
   background: rgba(18, 18, 20, 0.33);
+  border-radius: var(--radius-lg);
   padding: 2rem 1.75rem;
 }
 
@@ -436,12 +497,23 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 }
 .process-body {
   font-size: 0.925rem;
-  color: var(--ink);
+  color: var(--body-text);
   line-height: 1.72;
 }
 
 /* === ABOUT SECTION === */
 .about { background: var(--black); }
+/* About's heading is bigger than the standard .section-headline-2 (56px
+   vs 44px) and sits full-width above .two-col rather than inside the
+   half-width text column — per the Figma reference, which uses a
+   separate, larger heading treatment just for this section. Moving it
+   out of the text column (see index.html) is what actually stops it
+   wrapping to two lines; this override just restores its larger size
+   and the 48px gap to the row below. */
+#about-heading {
+  font-size: clamp(2.5rem, 5.5vw, 3.5rem);
+  margin-bottom: 3rem;
+}
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -480,16 +552,40 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 
 .about-body p {
   font-size: 0.96rem;
-  color: var(--muted);
+  color: var(--body-text);
   line-height: 1.78;
   margin-bottom: 1.25rem;
 }
 .about-body p:last-child { margin-bottom: 0; }
 .about-body strong { color: var(--ink); font-weight: 600; }
 
+/* Credentials — small chip list under the About body copy, styled to
+   match the flat --chip-dark surface the Figma reference uses for this
+   exact component (no border — the design's chips are a solid fill). */
+.about-credentials { margin-top: 1.75rem; }
+.credential-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+.credential-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: var(--chip-dark);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.9rem;
+}
+
 /* === CTA BAND === */
 .cta-band {
-  background: var(--red);
+  background: var(--red-bright);
   padding-block: clamp(3rem, 6vw, 5rem);
   position: relative;
   overflow: hidden;
@@ -530,7 +626,7 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 }
 .cta-band-sub {
   font-size: 1rem;
-  color: rgba(244, 244, 245, 0.72);
+  color: var(--body-text);
   max-width: 480px;
   margin-inline: auto;
   line-height: 1.7;
@@ -583,7 +679,7 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
 }
 .footer-blurb {
   font-size: 0.875rem;
-  color: var(--muted);
+  color: var(--body-text);
   line-height: 1.72;
   max-width: 360px;
 }
@@ -597,13 +693,13 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   align-items: flex-start;
   gap: 0.65rem;
   font-size: 0.875rem;
-  color: var(--muted);
+  color: var(--body-text);
   margin-bottom: 0.75rem;
   line-height: 1.55;
 }
 .footer-contact-item:last-child { margin-bottom: 0; }
 .footer-contact-item svg { flex-shrink: 0; margin-top: 1px; color: var(--steel); }
-.footer-contact-item a { color: var(--muted); transition: color var(--ease); }
+.footer-contact-item a { color: var(--body-text); transition: color var(--ease); }
 .footer-contact-item a:hover { color: var(--red-bright); }
 
 .footer-bottom {
@@ -818,6 +914,10 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   /* Same staggered per-line composition as the wider breakpoints — the
      Figma small frame keeps it, it's not a plain centered block. */
   .hero-headline-2 { font-size: clamp(2rem, 11.18vw, 6.8rem); }
+  .hero-support {
+    max-width: none;
+    margin-left: 0;
+  }
   .hero-ctas {
     justify-content: center;
     gap: 1.45rem;
@@ -832,17 +932,19 @@ section { padding-block: clamp(4rem, 8vw, 7rem); }
   .about-photo-wrap   { display: none; }
   .about-photo-band   { display: block; order: -1; }
   .footer-grid        { grid-template-columns: 1fr 1fr; }
+  /* 4 divides evenly by 2, so unlike .process-grid this folds through
+     an intermediate 2x2 step instead of jumping straight to 1 column —
+     same cadence as .footer-grid above. */
+  .who-grid           { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
   .footer-grid       { grid-template-columns: 1fr; }
   .form-row          { grid-template-columns: 1fr; }
+  .who-grid          { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .stats-row   { gap: 1.5rem; }
-  .stat-num    { font-size: 2rem; }
-
   .hero-ctas { flex-direction: column; align-items: stretch; }
   .hero-ctas .btn { width: 100%; }
 
