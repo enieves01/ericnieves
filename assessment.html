@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Assessment — Eric Nieves Coaching</title>
+  <meta name="description" content="What to expect from a free fitness assessment with Eric Nieves — what it involves, who it's for, how long it takes, and how to schedule yours.">
+  <meta property="og:title" content="Free Assessment — Eric Nieves Coaching">
+  <meta property="og:description" content="No obligation. Just a conversation about your goals, your needs, and whether coaching is the right fit.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HERO — same nav as the homepage (.hero-nav and children,
+         reused verbatim), without the full-bleed photo hero. Just a
+         compact title band for a content page.
+    ============================================================ -->
+    <section class="page-hero" aria-labelledby="page-hero-heading">
+
+      <div class="pinstripe" aria-hidden="true"></div>
+
+      <!-- Nav lives inside the page hero, exactly like the homepage -->
+      <div class="hero-nav">
+        <nav class="hero-nav-links" aria-label="Main navigation">
+          <a href="index.html#who-help">Coaching</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+
+        <a href="index.html" class="hero-logo" aria-label="Eric Nieves Coaching — Home">
+          <img
+            src="assets/logo-header.png"
+            alt="Eric Nieves Coaching"
+            height="42"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+          >
+          <!-- Text fallback until logo asset is added -->
+          <span class="logo-text" style="display:none">
+            ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
+          </span>
+        </a>
+
+        <!-- Smallest breakpoint only: replaces .hero-nav-links with a
+             hamburger that opens #mobile-menu. Icon morphs to an X via
+             the aria-expanded attribute (see style.css). -->
+        <button
+          type="button"
+          class="hero-hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hero-hamburger-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Full-screen menu overlay, toggled by .hero-hamburger above
+           (smallest breakpoint only — see main.js). -->
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+        <a href="index.html#who-help">Coaching</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="page-hero-inner">
+        <div class="container">
+          <p class="eyebrow reveal"><span class="rule" aria-hidden="true"></span>Free assessment</p>
+          <h1 id="page-hero-heading" class="display-alt page-hero-headline reveal">Start With a Free Assessment</h1>
+          <p class="section-intro page-hero-intro reveal">The free assessment is an opportunity to discuss your goals, identify your current needs, and determine whether coaching is the right fit for you. There is no obligation to sign up.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHAT DOES THE ASSESSMENT INVOLVE
+    ============================================================ -->
+    <section class="section-panel" id="what-involves" aria-labelledby="what-involves-heading">
+      <div class="container">
+        <div class="prose">
+          <h2 id="what-involves-heading" class="display-alt section-headline-2 reveal">What does the assessment involve?</h2>
+
+          <div class="about-body reveal">
+            <p>We'll begin with a conversation about your:</p>
+          </div>
+
+          <ul class="body-list reveal">
+            <li>Fitness goals</li>
+            <li>Training experience</li>
+            <li>Current exercise routine</li>
+            <li>Previous injuries or movement limitations</li>
+            <li>Schedule, available equipment, and potential barriers</li>
+            <li>Expectations for personal training or online coaching</li>
+          </ul>
+
+          <div class="about-body reveal">
+            <p>For in-person clients, the assessment may also include introductory checks of posture, mobility, balance, movement quality, and basic strength. Movements are selected based on your comfort level and training history.</p>
+            <p>The assessment is not a medical evaluation or diagnosis. You may be asked to obtain clearance from a qualified healthcare provider when appropriate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHO IS THE ASSESSMENT FOR
+    ============================================================ -->
+    <section id="who-for" aria-labelledby="who-for-heading">
+      <div class="container">
+        <div class="prose">
+          <h2 id="who-for-heading" class="display-alt section-headline-2 reveal">Who is the assessment for?</h2>
+
+          <div class="about-body reveal">
+            <p>The assessment is designed for people who:</p>
+          </div>
+
+          <ul class="body-list reveal">
+            <li>Are beginning or returning to a fitness routine</li>
+            <li>Want to build strength with proper instruction</li>
+            <li>Have completed rehabilitation and want guidance returning to exercise</li>
+            <li>Need training modifications for previous injuries or movement limitations</li>
+            <li>Feel unsure about what exercises or program to follow</li>
+            <li>Want greater structure, accountability, and consistency</li>
+            <li>Are working toward general fitness, body-composition, or athletic goals</li>
+            <li>Are considering in-person personal training or online coaching</li>
+          </ul>
+
+          <div class="about-body reveal">
+            <p>You do not need to be in shape or have previous gym experience before scheduling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW LONG DOES IT TAKE
+    ============================================================ -->
+    <section class="section-panel" id="how-long" aria-labelledby="how-long-heading">
+      <div class="container">
+        <div class="prose">
+          <h2 id="how-long-heading" class="display-alt section-headline-2 reveal">How long does it take?</h2>
+
+          <div class="about-body reveal">
+            <p>Most assessments take approximately 45 minutes to one hour. The exact length may vary depending on your goals, training history, and whether movement or body-composition measurements are included.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHERE DOES IT TAKE PLACE
+    ============================================================ -->
+    <section id="location" aria-labelledby="location-heading">
+      <div class="container">
+        <div class="prose">
+          <h2 id="location-heading" class="display-alt section-headline-2 reveal">Where does it take place?</h2>
+
+          <div class="about-body reveal">
+            <p>In-person assessments are completed at my private training studio in the Lake Norman area. The studio provides a private, one-on-one environment without the crowds or distractions of a commercial gym. The exact address and arrival instructions will be provided after your appointment is confirmed.</p>
+            <p>Virtual assessments are also available for people interested in online coaching. These are completed through a video call and focus on your goals, history, current routine, available equipment, and programming needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHAT SHOULD I WEAR OR BRING
+    ============================================================ -->
+    <section class="section-panel" id="what-to-bring" aria-labelledby="what-to-bring-heading">
+      <div class="container">
+        <div class="prose">
+          <h2 id="what-to-bring-heading" class="display-alt section-headline-2 reveal">What should I wear or bring?</h2>
+
+          <div class="about-body reveal">
+            <p>Wear comfortable athletic clothing that allows you to move freely, along with supportive athletic shoes. You may also want to bring:</p>
+          </div>
+
+          <ul class="body-list reveal">
+            <li>Water</li>
+            <li>Information about previous injuries or surgeries</li>
+            <li>Relevant exercise or rehabilitation recommendations</li>
+            <li>A list of your current fitness goals</li>
+            <li>Questions about training or coaching</li>
+            <li>Any medical clearance you have been asked to obtain</li>
+          </ul>
+
+          <div class="about-body reveal">
+            <p>You do not need to prepare for a full workout. Any movement completed during the assessment will be introductory and adjusted to your ability and comfort level.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         READY TO GET STARTED — CTA BAND (same component as the
+         homepage's closing CTA band)
+    ============================================================ -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="cta-band-texture" aria-hidden="true"></div>
+      <div class="container cta-band-inner">
+        <h2 id="cta-heading" class="display-alt cta-band-headline">Ready to get started?</h2>
+        <p class="cta-band-sub">Schedule your free assessment to discuss your goals, evaluate your needs, and determine the best next step for your training.</p>
+        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Schedule My Free Assessment</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid footer-grid--simple">
+
+        <!-- Branding -->
+        <div>
+          <a href="index.html" aria-label="Eric Nieves Coaching — Home">
+            <img
+              src="assets/logo-header.png"
+              alt="Eric Nieves Coaching"
+              class="footer-logo-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            >
+            <!-- Text fallback until logo asset is added -->
+            <div class="footer-logo-text" style="display:none">
+              <span class="en">EN<span class="accent"> ·</span></span>
+              <span class="sub">Eric Nieves Coaching</span>
+            </div>
+          </a>
+          <p class="footer-blurb">
+            Personal training and coaching in the Lake Norman area of Charlotte, NC.
+            Built around your life, your body, and your goals.
+          </p>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <p class="display-alt footer-col-title">Contact</p>
+
+          <div class="footer-contact-item">
+            <!-- Email icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a>
+          </div>
+
+          <div class="footer-contact-item">
+            <!-- Phone icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <a href="tel:+17045550142">(704) 555-0142</a>
+          </div>
+
+          <div class="footer-contact-item">
+            <!-- Location icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Lake Norman, NC
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <!-- ============================================================
+       BOOKING MODAL — quick lead form, triggered by every
+       "free assessment" CTA. Submitting opens the visitor's email
+       client with a pre-filled message to Eric (mailto: — no
+       backend required). See main.js for the trigger/submit logic.
+  ============================================================ -->
+  <div class="booking-modal" id="booking-modal" aria-hidden="true">
+    <div class="booking-modal-overlay" data-booking-close></div>
+    <div class="booking-modal-panel" role="dialog" aria-modal="true" aria-labelledby="booking-modal-heading">
+      <button type="button" class="booking-modal-close" data-booking-close aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Free assessment</p>
+      <h2 id="booking-modal-heading" class="display-alt booking-modal-heading">Book your session</h2>
+      <p class="booking-modal-email">Prefer email? Reach Eric directly at <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a></p>
+
+      <form id="booking-form" novalidate aria-label="Book a free assessment">
+
+        <div class="form-group">
+          <label class="form-label" for="booking-name">Name <span aria-hidden="true">*</span></label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-name"
+            name="name"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="booking-email">Email <span aria-hidden="true">*</span></label>
+            <input
+              class="form-input"
+              type="email"
+              id="booking-email"
+              name="email"
+              autocomplete="email"
+              placeholder="you@email.com"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="booking-phone">Phone <span aria-hidden="true">*</span></label>
+            <input
+              class="form-input"
+              type="tel"
+              id="booking-phone"
+              name="phone"
+              autocomplete="tel"
+              placeholder="(704) 555-0100"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-coaching-option">Preferred coaching option</label>
+          <select class="form-input form-select" id="booking-coaching-option" name="coaching_option">
+            <option value="" selected>Select an option</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Online">Online</option>
+            <option value="Hybrid (Online + Live Session)">Hybrid (Online + Live Session)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-goal">Primary fitness goal</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-goal"
+            name="goal"
+            placeholder="e.g. Build strength, lose weight, return from injury"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-injuries">Previous injuries or limitations (optional)</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-injuries"
+            name="injuries"
+            placeholder="Anything Eric should know before your assessment?"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="booking-schedule">Preferred training days and times (optional)</label>
+          <input
+            class="form-input"
+            type="text"
+            id="booking-schedule"
+            name="schedule"
+            placeholder="e.g. Weekday mornings, Tuesday/Thursday evenings"
+          >
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-red btn-skew">
+            <span class="btn-label">
+              Send request
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- Shown after JS builds the mailto link -->
+        <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">
+          Your request has been received. I'll contact you shortly to discuss your goals and schedule your assessment.
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
