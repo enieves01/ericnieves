@@ -13,30 +13,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <!-- Homepage simplification overrides. Kept local for easy review in this redesign branch. -->
+  <!-- Phase 2 homepage polish. Kept local on the redesign branch for easy review. -->
   <style>
+    :root {
+      --section-tight: clamp(3.25rem, 6vw, 5.25rem);
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+    }
+    .section-kicker::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+      transform: skewX(-18deg);
+    }
+    .section-lead {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .section-lead .section-headline-2,
+    .section-lead .section-intro { margin-bottom: 0; }
+    .section-lead .section-intro { max-width: 34rem; justify-self: end; }
+
+    /* Compact audience strip */
     .fit-strip {
       background: var(--red-bright);
-      padding-block: clamp(1.75rem, 4vw, 2.75rem);
+      padding-block: clamp(1.5rem, 3.5vw, 2.4rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .fit-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(-65deg, transparent 0 12px, rgba(0,0,0,.05) 12px 13px);
     }
     .fit-strip-inner {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem 2rem;
+      gap: 1.25rem 2rem;
       flex-wrap: wrap;
     }
     .fit-strip-label {
       margin: 0;
       flex: 0 0 auto;
       color: var(--ink);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
     }
     .fit-strip-items {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 0.65rem;
+      gap: 0.6rem;
       flex: 1 1 36rem;
     }
     .fit-chip {
@@ -44,68 +91,414 @@
       align-items: center;
       min-height: 38px;
       padding: 0.55rem 0.9rem;
-      border-radius: var(--radius);
-      background: rgba(18, 18, 20, 0.28);
+      border-radius: 4px;
+      background: rgba(18, 18, 20, 0.25);
+      border: 1px solid rgba(255,255,255,.09);
       font-family: 'Oswald', sans-serif;
       font-weight: 600;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       line-height: 1.2;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--ink);
     }
+
+    /* Premium coaching cards */
+    .coaching-options {
+      position: relative;
+      padding-block: var(--section-tight);
+    }
+    .coaching-options::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
     .coaching-options .process-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 920px;
+      max-width: 1040px;
       margin-inline: auto;
-      margin-top: 3rem;
+      margin-top: 0;
+      gap: 1.25rem;
+    }
+    .service-card {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      padding: clamp(1.75rem, 3vw, 2.35rem);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(193,39,45,.16), transparent 38%),
+        var(--card-dark);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease);
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(193,39,45,.72);
+    }
+    .service-card-number {
+      position: absolute;
+      top: 1rem;
+      right: 1.15rem;
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: .85;
+      color: rgba(255,255,255,.035);
+      pointer-events: none;
     }
     .service-kicker {
       display: block;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.85rem;
       font-family: 'Oswald', sans-serif;
-      font-weight: 500;
-      font-size: 0.72rem;
+      font-weight: 600;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.17em;
       color: var(--red-bright);
     }
+    .service-card .who-card-title {
+      max-width: 22rem;
+      margin-bottom: 1rem;
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .service-card .who-card-body {
+      max-width: 31rem;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+    .service-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .service-point {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 0.65rem;
+      border-radius: 3px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.06);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,.86);
+    }
+    .service-point::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red-bright);
+      box-shadow: 0 0 0 3px rgba(193,39,45,.12);
+    }
     .service-note {
-      margin-top: 1.1rem;
-      padding-top: 1rem;
+      margin-top: 1.35rem;
+      padding-top: 1.1rem;
       border-top: 1px solid var(--line);
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       color: var(--body-text);
       line-height: 1.6;
     }
-    .process .process-body {
-      max-width: 29rem;
+
+    /* Process becomes a sharper bridge section */
+    .process {
+      padding-block: var(--section-tight);
+      position: relative;
+      overflow: hidden;
     }
+    .process::after {
+      content: 'PROGRESS';
+      position: absolute;
+      right: -1rem;
+      bottom: -0.16em;
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(5rem, 17vw, 14rem);
+      line-height: .8;
+      color: rgba(0,0,0,.07);
+      pointer-events: none;
+    }
+    .process > .container { position: relative; z-index: 1; }
+    .process .process-grid { margin-top: 2.25rem; gap: 1rem; }
+    .process .process-card {
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 1.65rem;
+      min-height: 210px;
+    }
+    .process .process-num {
+      font-size: 2.15rem;
+      color: rgba(255,255,255,.42);
+    }
+    .process .process-body { max-width: 29rem; }
+
+    /* Headshot-ready About */
+    .about {
+      padding-block: var(--section-tight);
+      position: relative;
+    }
+    .about .two-col {
+      grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
+      gap: clamp(2.75rem, 7vw, 6.5rem);
+      align-items: stretch;
+    }
+    .about-copy-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 1rem;
+    }
+    .about-body p:first-child {
+      font-size: clamp(1.08rem, 1.6vw, 1.22rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,.9);
+    }
+    .coach-portrait-shell {
+      min-height: 520px;
+      position: relative;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(145deg, rgba(193,39,45,.12), transparent 35%),
+        var(--panel);
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .coach-portrait-shell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.82));
+    }
+    .coach-portrait-shell img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: contain;
+      object-position: center;
+    }
+    .coach-photo-label {
+      position: absolute;
+      z-index: 2;
+      left: 1.3rem;
+      right: 1.3rem;
+      bottom: 1.25rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .coach-photo-name {
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: .95;
+      text-transform: uppercase;
+    }
+    .coach-photo-meta {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      color: rgba(255,255,255,.62);
+      text-align: right;
+    }
+    .about-photo-wrap { display: none; }
+    .about-photo-band { display: none !important; }
+
+    /* Future testimonial/results shell — hidden until real client proof is available. */
+    .results-section[hidden] { display: none !important; }
+
+    /* Instagram-ready section */
+    .social-section {
+      background: #0d0d0f;
+      padding-block: var(--section-tight);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .social-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .social-header-copy { max-width: 43rem; }
+    .social-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      color: var(--ink);
+      padding: .75rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      transition: border-color var(--ease), color var(--ease), transform var(--ease);
+      white-space: nowrap;
+    }
+    .social-handle:hover {
+      border-color: var(--red-bright);
+      color: var(--red-bright);
+      transform: translateY(-1px);
+    }
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .social-tile {
+      position: relative;
+      min-height: 260px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--card-dark);
+      isolation: isolate;
+    }
+    .social-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(150deg, rgba(193,39,45,.24), transparent 42%),
+        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
+    }
+    .social-tile:nth-child(2)::before {
+      background:
+        radial-gradient(circle at 75% 25%, rgba(193,39,45,.24), transparent 34%),
+        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
+    }
+    .social-tile:nth-child(3)::before {
+      background:
+        linear-gradient(35deg, rgba(193,39,45,.18), transparent 44%),
+        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
+    }
+    .social-tile-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+      background: linear-gradient(180deg, transparent 25%, rgba(10,10,11,.7));
+    }
+    .social-tile-icon {
+      position: absolute;
+      top: 1.15rem;
+      right: 1.15rem;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.82);
+    }
+    .social-tile-kicker {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--red-bright);
+      margin-bottom: .45rem;
+    }
+    .social-tile-title {
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .social-note {
+      margin-top: 1rem;
+      max-width: 48rem;
+      font-size: .8rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,.45);
+    }
+
+    /* FAQ polish */
     .faq-section {
       background: var(--panel);
+      padding-block: var(--section-tight);
     }
     .faq-standalone {
       margin-top: 0;
       max-width: 900px;
       margin-inline: auto;
     }
-    .faq-heading {
-      margin-bottom: 1rem;
+    .faq-heading { margin-bottom: 1rem; }
+    .faq-intro { margin-bottom: 2rem; max-width: 42rem; }
+    .faq-item {
+      border: 1px solid transparent;
+      transition: border-color var(--ease), background var(--ease);
     }
-    .faq-intro {
-      margin-bottom: 2rem;
-      max-width: 42rem;
+    .faq-item:hover,
+    .faq-item[open] { border-color: rgba(193,39,45,.34); }
+
+    /* CTA/footer finish */
+    .cta-band { padding-block: clamp(3.2rem, 6vw, 5.2rem); }
+    .cta-band-sub { max-width: 420px; }
+    .site-footer { position: relative; }
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(193,39,45,.65), transparent);
     }
+
     @media (max-width: 960px) {
-      .coaching-options .process-grid {
-        grid-template-columns: 1fr;
-      }
-      .fit-strip-inner {
-        align-items: flex-start;
-      }
-      .fit-strip-items {
-        justify-content: flex-start;
-      }
+      .section-lead { grid-template-columns: 1fr; gap: 1rem; }
+      .section-lead .section-intro { justify-self: start; }
+      .coaching-options .process-grid { grid-template-columns: 1fr; }
+      .fit-strip-inner { align-items: flex-start; }
+      .fit-strip-items { justify-content: flex-start; }
+      .about .two-col { grid-template-columns: 1fr; }
+      .coach-portrait-shell { min-height: 430px; order: -1; }
+      .coach-portrait-shell img { min-height: 430px; }
+      .social-grid { grid-template-columns: 1fr 1fr; }
+      .social-tile:last-child { grid-column: 1 / -1; min-height: 220px; }
+    }
+
+    @media (max-width: 640px) {
+      .fit-chip { width: calc(50% - .3rem); justify-content: center; text-align: center; }
+      .service-card { min-height: auto; }
+      .service-card-number { font-size: 4.5rem; }
+      .coach-portrait-shell,
+      .coach-portrait-shell img { min-height: 360px; }
+      .coach-photo-label { align-items: flex-start; flex-direction: column; }
+      .coach-photo-meta { text-align: left; }
+      .social-header { align-items: flex-start; flex-direction: column; }
+      .social-grid { grid-template-columns: 1fr; }
+      .social-tile,
+      .social-tile:last-child { grid-column: auto; min-height: 220px; }
     }
   </style>
 </head>
@@ -127,6 +520,7 @@
         <nav class="hero-nav-links" aria-label="Main navigation">
           <a href="#coaching-options">Coaching</a>
           <a href="#about">About</a>
+          <a href="#social">Instagram</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -159,6 +553,7 @@
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
         <a href="#coaching-options">Coaching</a>
         <a href="#about">About</a>
+        <a href="#social">Instagram</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -206,21 +601,38 @@
     <section class="coaching-options" id="coaching-options" aria-labelledby="coaching-options-heading">
       <div class="container">
 
-        <h2 id="coaching-options-heading" class="display-alt section-headline-2 reveal">Choose how you want to train</h2>
-        <p class="reveal section-intro">Two ways to get a personalized plan, professional guidance, and progressive coaching.</p>
+        <div class="section-lead">
+          <div>
+            <span class="section-kicker reveal">Ways to work together</span>
+            <h2 id="coaching-options-heading" class="display-alt section-headline-2 reveal">Choose how you want to train</h2>
+          </div>
+          <p class="reveal section-intro">Personalized programming, professional guidance, and a clear path forward—whether we train together in Lake Norman or work remotely.</p>
+        </div>
 
         <div class="process-grid">
 
-          <article class="who-card reveal">
+          <article class="who-card service-card reveal">
+            <span class="service-card-number" aria-hidden="true">01</span>
             <span class="service-kicker">Lake Norman, NC</span>
             <h3 class="who-card-title">In-Person Personal Training</h3>
             <p class="who-card-body">Private one-on-one sessions built around your goals, experience, movement needs, and injury history. Learn proper technique, build strength, and progress with hands-on coaching.</p>
+            <div class="service-points" aria-label="In-person coaching highlights">
+              <span class="service-point">1:1 Coaching</span>
+              <span class="service-point">Technique</span>
+              <span class="service-point">Progressive Training</span>
+            </div>
           </article>
 
-          <article class="who-card reveal">
+          <article class="who-card service-card reveal">
+            <span class="service-card-number" aria-hidden="true">02</span>
             <span class="service-kicker">Train From Anywhere</span>
             <h3 class="who-card-title">Online Coaching</h3>
             <p class="who-card-body">Personalized programming, exercise demonstrations, form review, regular check-ins, cardiovascular guidance, nutrition support, and ongoing messaging.</p>
+            <div class="service-points" aria-label="Online coaching highlights">
+              <span class="service-point">Programming</span>
+              <span class="service-point">Form Review</span>
+              <span class="service-point">Accountability</span>
+            </div>
             <p class="service-note"><strong>Want more hands-on support?</strong> Add a monthly in-person or virtual coaching session for technique work and program review.</p>
           </article>
 
@@ -239,6 +651,7 @@
     <section class="process" id="process" aria-labelledby="process-heading">
       <div class="container">
 
+        <span class="section-kicker reveal" style="color:rgba(255,255,255,.76)">Simple by design</span>
         <h2 id="process-heading" class="display-alt section-headline-2 reveal">How it works</h2>
         <p class="section-intro">Start where you are. Build a plan that fits. Adjust it as you progress.</p>
 
@@ -267,21 +680,39 @@
     </section>
 
     <!-- ============================================================
-         RESULTS / TESTIMONIALS
-         Add real client proof here when approved testimonials are available.
-         Keeping this out of the visible page avoids inventing client claims.
+         RESULTS / TESTIMONIALS — READY FOR REAL CLIENT PROOF
+         Remove `hidden` once approved testimonials and/or client photos
+         are available. The shell is intentionally non-public for now.
     ============================================================ -->
+    <section class="results-section" id="results" hidden aria-labelledby="results-heading">
+      <div class="container">
+        <span class="section-kicker">Client results</span>
+        <h2 id="results-heading" class="display-alt section-headline-2">Real progress, real people</h2>
+        <!-- Future content pattern:
+          <article class="testimonial-card">
+            <blockquote>Approved client testimonial here.</blockquote>
+            <p>Client name / goal / duration</p>
+          </article>
+        -->
+      </div>
+    </section>
 
     <!-- ============================================================
          ABOUT
     ============================================================ -->
     <section class="about" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <h2 id="about-heading" class="display-alt section-headline-2 reveal">Meet Your Coach</h2>
+        <div class="section-lead">
+          <div>
+            <span class="section-kicker reveal">Your coach</span>
+            <h2 id="about-heading" class="display-alt section-headline-2 reveal">Meet Eric Nieves</h2>
+          </div>
+          <p class="section-intro reveal">Training should make you more capable—not leave you dependent on a coach forever.</p>
+        </div>
 
         <div class="two-col">
 
-          <div class="reveal-left">
+          <div class="about-copy-panel reveal-left">
             <div class="about-body">
               <p>
                 I'm Eric Nieves, a NASM Certified Personal Trainer specializing in strength development, corrective exercise, and helping people train confidently while accounting for previous injuries and movement limitations.
@@ -302,15 +733,77 @@
             </div>
           </div>
 
-          <div class="about-photo-wrap reveal-right" aria-hidden="true">
-            <img src="assets/about-photo-wedge.png" alt="" class="about-photo">
-          </div>
-
-          <div class="about-photo-band" aria-hidden="true">
-            <img src="assets/mobile-about-photo.png" alt="">
+          <!-- Headshot-ready shell. Replace src with the future professional portrait. -->
+          <div class="coach-portrait-shell reveal-right" aria-label="Eric Nieves coaching portrait">
+            <img src="assets/about-photo-wedge.png" alt="Eric Nieves" loading="lazy">
+            <div class="coach-photo-label">
+              <span class="coach-photo-name">Eric Nieves</span>
+              <span class="coach-photo-meta">CPT · CES · CNC<br>Lake Norman, NC</span>
+            </div>
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FROM THE GYM / INSTAGRAM-READY
+         This is a branded content shell now. Later, replace the tile
+         interiors from an Instagram/API integration without redesigning
+         the section or changing its overall footprint.
+    ============================================================ -->
+    <section class="social-section" id="social" aria-labelledby="social-heading">
+      <div class="container">
+        <div class="social-header">
+          <div class="social-header-copy">
+            <span class="section-kicker reveal">From the gym</span>
+            <h2 id="social-heading" class="display-alt section-headline-2 reveal">Training in real life</h2>
+            <p class="section-intro reveal">Training clips, coaching ideas, exercise breakdowns, and the work behind the program.</p>
+          </div>
+
+          <a class="social-handle reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="Follow Eric Nieves Fitness on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            @enieves.fit
+          </a>
+        </div>
+
+        <div class="social-grid" data-instagram-feed>
+          <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View training content on Instagram">
+            <span class="social-tile-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </span>
+            <span class="social-tile-inner">
+              <span class="social-tile-kicker">Training</span>
+              <span class="social-tile-title">The work</span>
+            </span>
+          </a>
+
+          <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View coaching content on Instagram">
+            <span class="social-tile-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path><path d="M8 7h8M8 11h8"></path></svg>
+            </span>
+            <span class="social-tile-inner">
+              <span class="social-tile-kicker">Coaching</span>
+              <span class="social-tile-title">Why we train it</span>
+            </span>
+          </a>
+
+          <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View behind-the-scenes content on Instagram">
+            <span class="social-tile-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8M12 8v8"></path></svg>
+            </span>
+            <span class="social-tile-inner">
+              <span class="social-tile-kicker">Behind the scenes</span>
+              <span class="social-tile-title">Beyond the program</span>
+            </span>
+          </a>
+        </div>
+
+        <p class="social-note">This section is structured for a future Instagram feed integration. For now it intentionally links to the profile rather than displaying fabricated or stale post data.</p>
       </div>
     </section>
 
@@ -320,6 +813,7 @@
     <section class="faq-section" id="faq" aria-labelledby="faq-heading">
       <div class="container">
         <div class="faq faq-standalone">
+          <span class="section-kicker reveal">Before you start</span>
           <h2 id="faq-heading" class="display-alt section-headline-2 faq-heading reveal">Frequently asked questions</h2>
           <p class="section-intro faq-intro reveal">A few practical details before getting started.</p>
 
@@ -469,41 +963,17 @@
 
         <div class="form-group">
           <label class="form-label" for="booking-name">Name <span aria-hidden="true">*</span></label>
-          <input
-            class="form-input"
-            type="text"
-            id="booking-name"
-            name="name"
-            autocomplete="name"
-            placeholder="Your name"
-            required
-          >
+          <input class="form-input" type="text" id="booking-name" name="name" autocomplete="name" placeholder="Your name" required>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="booking-email">Email <span aria-hidden="true">*</span></label>
-            <input
-              class="form-input"
-              type="email"
-              id="booking-email"
-              name="email"
-              autocomplete="email"
-              placeholder="you@email.com"
-              required
-            >
+            <input class="form-input" type="email" id="booking-email" name="email" autocomplete="email" placeholder="you@email.com" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="booking-phone">Phone <span aria-hidden="true">*</span></label>
-            <input
-              class="form-input"
-              type="tel"
-              id="booking-phone"
-              name="phone"
-              autocomplete="tel"
-              placeholder="(914) 817-8153"
-              required
-            >
+            <input class="form-input" type="tel" id="booking-phone" name="phone" autocomplete="tel" placeholder="(914) 817-8153" required>
           </div>
         </div>
 
@@ -519,35 +989,17 @@
 
         <div class="form-group">
           <label class="form-label" for="booking-goal">Primary fitness goal</label>
-          <input
-            class="form-input"
-            type="text"
-            id="booking-goal"
-            name="goal"
-            placeholder="e.g. Build strength, lose weight, return from injury"
-          >
+          <input class="form-input" type="text" id="booking-goal" name="goal" placeholder="e.g. Build strength, lose weight, return from injury">
         </div>
 
         <div class="form-group">
           <label class="form-label" for="booking-injuries">Previous injuries or limitations (optional)</label>
-          <input
-            class="form-input"
-            type="text"
-            id="booking-injuries"
-            name="injuries"
-            placeholder="Anything Eric should know before your assessment?"
-          >
+          <input class="form-input" type="text" id="booking-injuries" name="injuries" placeholder="Anything Eric should know before your assessment?">
         </div>
 
         <div class="form-group">
           <label class="form-label" for="booking-schedule">Preferred training days and times (optional)</label>
-          <input
-            class="form-input"
-            type="text"
-            id="booking-schedule"
-            name="schedule"
-            placeholder="e.g. Weekday mornings, Tuesday/Thursday evenings"
-          >
+          <input class="form-input" type="text" id="booking-schedule" name="schedule" placeholder="e.g. Weekday mornings, Tuesday/Thursday evenings">
         </div>
 
         <div class="form-submit-row">
