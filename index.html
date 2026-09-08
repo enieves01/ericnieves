@@ -4,14 +4,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eric Nieves Coaching — Personal Training in Lake Norman, NC</title>
-  <meta name="description" content="Eric Nieves is a personal trainer in the Lake Norman area of Charlotte, NC. Book a free fitness assessment and start building the body that won't quit.">
+  <meta name="description" content="Personalized in-person training in Lake Norman and online coaching focused on strength, confident movement, and sustainable progress. Request a free assessment.">
   <meta property="og:title" content="Eric Nieves Coaching">
-  <meta property="og:description" content="Personal training and coaching in Lake Norman, NC. Book your free assessment today.">
+  <meta property="og:description" content="Personal training and online coaching built around your body, goals, and starting point. Request a free assessment.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Homepage simplification overrides. Kept local for easy review in this redesign branch. -->
+  <style>
+    .fit-strip {
+      background: var(--red-bright);
+      padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    }
+    .fit-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem 2rem;
+      flex-wrap: wrap;
+    }
+    .fit-strip-label {
+      margin: 0;
+      flex: 0 0 auto;
+      color: var(--ink);
+    }
+    .fit-strip-items {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      flex: 1 1 36rem;
+    }
+    .fit-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0.55rem 0.9rem;
+      border-radius: var(--radius);
+      background: rgba(18, 18, 20, 0.28);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .coaching-options .process-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 920px;
+      margin-inline: auto;
+      margin-top: 3rem;
+    }
+    .service-kicker {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red-bright);
+    }
+    .service-note {
+      margin-top: 1.1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.84rem;
+      color: var(--body-text);
+      line-height: 1.6;
+    }
+    .process .process-body {
+      max-width: 29rem;
+    }
+    .faq-section {
+      background: var(--panel);
+    }
+    .faq-standalone {
+      margin-top: 0;
+      max-width: 900px;
+      margin-inline: auto;
+    }
+    .faq-heading {
+      margin-bottom: 1rem;
+    }
+    .faq-intro {
+      margin-bottom: 2rem;
+      max-width: 42rem;
+    }
+    @media (max-width: 960px) {
+      .coaching-options .process-grid {
+        grid-template-columns: 1fr;
+      }
+      .fit-strip-inner {
+        align-items: flex-start;
+      }
+      .fit-strip-items {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -22,18 +118,16 @@
     ============================================================ -->
     <section class="hero" aria-labelledby="hero-headline">
 
-      <!-- Diagonal wedge portrait, pre-clipped -->
       <div class="hero-photo-wedge" aria-hidden="true">
         <img src="assets/hero-photo-wedge.png" alt="">
       </div>
-      <!-- Diagonal pinstripe texture overlay -->
       <div class="pinstripe" aria-hidden="true"></div>
 
-      <!-- Nav lives inside the hero, not a separate sticky header -->
       <div class="hero-nav">
         <nav class="hero-nav-links" aria-label="Main navigation">
-          <a href="#who-help">Coaching</a>
+          <a href="#coaching-options">Coaching</a>
           <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -44,15 +138,11 @@
             height="42"
             onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
           >
-          <!-- Text fallback until logo asset is added -->
           <span class="logo-text" style="display:none">
             ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
           </span>
         </a>
 
-        <!-- Smallest breakpoint only: replaces .hero-nav-links with a
-             hamburger that opens #mobile-menu. Icon morphs to an X via
-             the aria-expanded attribute (see style.css). -->
         <button
           type="button"
           class="hero-hamburger"
@@ -66,11 +156,10 @@
         </button>
       </div>
 
-      <!-- Full-screen menu overlay, toggled by .hero-hamburger above
-           (smallest breakpoint only — see main.js). -->
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-        <a href="#who-help">Coaching</a>
+        <a href="#coaching-options">Coaching</a>
         <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -82,56 +171,31 @@
         </h1>
 
         <div class="hero-support">
-          <p class="section-intro">In-person personal training in Lake Norman and virtual coaching for people who want to build strength, train confidently following previous injuries, and feel better in their bodies.</p>
+          <p class="section-intro">Build strength, move better, and train with confidence through personalized coaching in Lake Norman or online.</p>
 
           <div class="hero-ctas">
-            <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
-            <a href="#coaching-options" class="btn btn-ghost btn-skew"><span class="btn-label">Explore Coaching Options</span></a>
+            <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
+            <a href="#coaching-options" class="btn btn-ghost btn-skew"><span class="btn-label">Explore coaching</span></a>
           </div>
         </div>
       </div>
 
-      <!-- Small breakpoint: photo reflows into a plain full-bleed landscape
-           band below the CTAs (no diagonal/skew, per the Figma small frame).
-           Lives outside .hero-inner-2 so it isn't constrained by its side
-           padding and can run the full width of the viewport. -->
       <div class="hero-photo-band" aria-hidden="true">
         <img src="assets/hero-photo-band-small.jpg" alt="">
       </div>
     </section>
 
     <!-- ============================================================
-         WHO I HELP
+         QUICK FIT STRIP
     ============================================================ -->
-    <section class="who-help" id="who-help" aria-labelledby="who-help-heading">
-      <div class="container">
-
-        <h2 id="who-help-heading" class="display-alt section-headline-2 reveal">Coaching built for where you are now</h2>
-
-        <p class="reveal section-intro">Whether you are starting for the first time, returning after an injury, or working toward your next performance goal, your coaching should reflect your needs—not someone else's program.</p>
-
-        <div class="who-grid">
-
-          <article class="process-card reveal">
-            <h3 class="process-title">Returning After Pain or Injury</h3>
-            <p class="process-body">Rebuild strength, confidence, and movement capacity following rehab or time away from training.</p>
-          </article>
-
-          <article class="process-card reveal">
-            <h3 class="process-title">Building Sustainable Strength</h3>
-            <p class="process-body">Learn proper technique and follow a structured progression designed to help you become stronger over time.</p>
-          </article>
-
-          <article class="process-card reveal">
-            <h3 class="process-title">Creating a Consistent Fitness Plan</h3>
-            <p class="process-body">Get a realistic training plan, professional guidance, and accountability that fit your schedule and experience level.</p>
-          </article>
-
-          <article class="process-card reveal">
-            <h3 class="process-title">Building Lasting Habits</h3>
-            <p class="process-body">Combine strength training, cardiovascular conditioning, mobility, and nutrition habits without making fitness unnecessarily complicated.</p>
-          </article>
-
+    <section class="fit-strip" aria-label="Who coaching is for">
+      <div class="container fit-strip-inner">
+        <p class="display-alt footer-col-title fit-strip-label reveal">Coaching for</p>
+        <div class="fit-strip-items reveal">
+          <span class="fit-chip">Getting Stronger</span>
+          <span class="fit-chip">Returning From Injury</span>
+          <span class="fit-chip">Building Consistency</span>
+          <span class="fit-chip">Performance</span>
         </div>
       </div>
     </section>
@@ -142,31 +206,28 @@
     <section class="coaching-options" id="coaching-options" aria-labelledby="coaching-options-heading">
       <div class="container">
 
-        <h2 id="coaching-options-heading" class="display-alt section-headline-2 reveal">Coaching designed around your goals</h2>
-
-        <p class="reveal section-intro">Choose the level of support that best fits your schedule, training environment, and experience.</p>
+        <h2 id="coaching-options-heading" class="display-alt section-headline-2 reveal">Choose how you want to train</h2>
+        <p class="reveal section-intro">Two ways to get a personalized plan, professional guidance, and progressive coaching.</p>
 
         <div class="process-grid">
 
           <article class="who-card reveal">
+            <span class="service-kicker">Lake Norman, NC</span>
             <h3 class="who-card-title">In-Person Personal Training</h3>
-            <p class="who-card-body">Private one-on-one coaching in the Lake Norman area. Sessions focus on strength, movement quality, proper technique, and progressive training based on your goals, experience, and injury history.</p>
+            <p class="who-card-body">Private one-on-one sessions built around your goals, experience, movement needs, and injury history. Learn proper technique, build strength, and progress with hands-on coaching.</p>
           </article>
 
           <article class="who-card reveal">
+            <span class="service-kicker">Train From Anywhere</span>
             <h3 class="who-card-title">Online Coaching</h3>
-            <p class="who-card-body">Receive a personalized weekly training plan, cardiovascular and nutrition guidance, exercise demonstrations, form review, regular check-ins, and ongoing messaging support.</p>
-          </article>
-
-          <article class="who-card reveal">
-            <h3 class="who-card-title">Online Coaching + Live Session</h3>
-            <p class="who-card-body">Everything included with online coaching, plus one in-person or virtual coaching session each month for additional instruction, technique work, and program support.</p>
+            <p class="who-card-body">Personalized programming, exercise demonstrations, form review, regular check-ins, cardiovascular guidance, nutrition support, and ongoing messaging.</p>
+            <p class="service-note"><strong>Want more hands-on support?</strong> Add a monthly in-person or virtual coaching session for technique work and program review.</p>
           </article>
 
         </div>
 
         <div class="coaching-options-cta">
-          <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
+          <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
         </div>
 
       </div>
@@ -178,49 +239,38 @@
     <section class="process" id="process" aria-labelledby="process-heading">
       <div class="container">
 
-        <h2 id="process-heading" class="display-alt section-headline-2 reveal">A plan built around you</h2>
-
-        <p class="section-intro">Your coaching begins with understanding where you are now and continues to evolve as you make progress.</p>
+        <h2 id="process-heading" class="display-alt section-headline-2 reveal">How it works</h2>
+        <p class="section-intro">Start where you are. Build a plan that fits. Adjust it as you progress.</p>
 
         <div class="process-grid">
 
           <article class="process-card reveal">
             <span class="process-num" aria-hidden="true">01</span>
             <h3 class="process-title">Assess</h3>
-            <p class="process-body">
-              We discuss your goals, training history, previous injuries, current routine,
-              and the challenges you have faced in your fitness journey. Your assessment may
-              also include basic strength, mobility, balance, posture, and movement testing.
-              Optional body-composition measurements, including body-fat percentage and
-              skeletal muscle mass, may also be recorded to establish a baseline and monitor
-              progress over time.
-            </p>
+            <p class="process-body">We identify your goals, training history, movement needs, and starting point.</p>
           </article>
 
           <article class="process-card reveal">
             <span class="process-num" aria-hidden="true">02</span>
             <h3 class="process-title">Plan</h3>
-            <p class="process-body">
-              Your program is built around your body, experience, schedule, available
-              equipment, and goals—not copied from a generic template. Your plan may
-              include strength training, cardiovascular conditioning, mobility work, and
-              nutrition-focused action steps.
-            </p>
+            <p class="process-body">Your program is built around your body, schedule, experience, equipment, and goals.</p>
           </article>
 
           <article class="process-card reveal">
             <span class="process-num" aria-hidden="true">03</span>
             <h3 class="process-title">Coach</h3>
-            <p class="process-body">
-              We refine your technique, monitor your progress, adjust your program, and
-              keep you accountable. Your plan evolves as your strength, confidence, and
-              abilities improve.
-            </p>
+            <p class="process-body">We refine technique, track progress, and adjust the plan as you get stronger and more capable.</p>
           </article>
 
         </div>
       </div>
     </section>
+
+    <!-- ============================================================
+         RESULTS / TESTIMONIALS
+         Add real client proof here when approved testimonials are available.
+         Keeping this out of the visible page avoids inventing client claims.
+    ============================================================ -->
 
     <!-- ============================================================
          ABOUT
@@ -231,31 +281,13 @@
 
         <div class="two-col">
 
-          <!-- Text -->
           <div class="reveal-left">
             <div class="about-body">
               <p>
-                I'm Eric Nieves, a Certified Personal Trainer and owner of Eric Nieves Coaching.
-                I specialize in corrective exercise, strength development, and helping people
-                train confidently while accounting for previous injuries and movement limitations.
+                I'm Eric Nieves, a NASM Certified Personal Trainer specializing in strength development, corrective exercise, and helping people train confidently while accounting for previous injuries and movement limitations.
               </p>
               <p>
-                With a B.S. in Biology, experience in rehabilitation-focused settings, and
-                certifications in personal training, corrective exercise, and nutrition coaching,
-                I take a practical approach that connects movement quality with effective strength
-                and fitness training.
-              </p>
-              <p>
-                I work with a wide range of clients, including people beginning their fitness
-                journeys, individuals returning to training after injury or time away, and
-                athletes pursuing performance goals. My coaching combines strength training,
-                mobility, cardiovascular conditioning, nutrition guidance, and accountability to
-                create results that are both effective and sustainable.
-              </p>
-              <p>
-                Training does not need to be unnecessarily complicated. My goal is to give you
-                the right plan, teach you how to execute it confidently, and help you become
-                stronger and more capable over time.
+                With a B.S. in Biology and experience in rehabilitation-focused settings, I connect movement quality with effective strength and fitness training. My goal is simple: give you the right plan, teach you how to execute it confidently, and help you become stronger and more capable over time.
               </p>
             </div>
 
@@ -270,23 +302,26 @@
             </div>
           </div>
 
-          <!-- Photo (hidden on tablet/mobile via CSS) -->
           <div class="about-photo-wrap reveal-right" aria-hidden="true">
             <img src="assets/about-photo-wedge.png" alt="" class="about-photo">
           </div>
 
-          <!-- Mobile-only: photo reflows into a horizontal skewed band above the text -->
           <div class="about-photo-band" aria-hidden="true">
             <img src="assets/mobile-about-photo.png" alt="">
           </div>
 
         </div>
+      </div>
+    </section>
 
-        <!-- FAQ — native <details>/<summary> so open/close, keyboard (Enter/Space
-             on the summary), and touch all come from the browser for free,
-             no custom JS. -->
-        <div class="faq">
-          <p class="display-alt footer-col-title">Frequently asked questions</p>
+    <!-- ============================================================
+         FAQ
+    ============================================================ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="faq faq-standalone">
+          <h2 id="faq-heading" class="display-alt section-headline-2 faq-heading reveal">Frequently asked questions</h2>
+          <p class="section-intro faq-intro reveal">A few practical details before getting started.</p>
 
           <div class="faq-list">
             <details class="faq-item">
@@ -296,17 +331,7 @@
                   <polyline points="6 9 12 15 18 9"/>
                 </svg>
               </summary>
-              <p class="faq-answer">In-person coaching is available in the Lake Norman area. Exact location details are provided when an assessment is scheduled.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-question">
-                Do I need previous gym experience?
-                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </summary>
-              <p class="faq-answer">No. Coaching is adapted to your current experience, ability, and comfort level.</p>
+              <p class="faq-answer">In-person coaching is available in the Lake Norman area. Exact location details are provided when an assessment is arranged.</p>
             </details>
 
             <details class="faq-item">
@@ -321,22 +346,22 @@
 
             <details class="faq-item">
               <summary class="faq-question">
-                What is included with online coaching?
+                What happens during the free assessment?
                 <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9"/>
                 </svg>
               </summary>
-              <p class="faq-answer">Online coaching includes personalized programming, exercise demonstrations, form review, regular check-ins, cardio and nutrition guidance, and messaging support.</p>
+              <p class="faq-answer">We'll discuss your goals, training history, previous injuries, current routine, and what has been getting in the way. From there, we'll determine the most useful next step for your training.</p>
             </details>
 
             <details class="faq-item">
               <summary class="faq-question">
-                Is the assessment really free?
+                How often should I train?
                 <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9"/>
                 </svg>
               </summary>
-              <p class="faq-answer">Yes. The introductory assessment allows us to discuss your goals, evaluate your needs, and determine whether coaching is a good fit.</p>
+              <p class="faq-answer">That depends on your goals, schedule, recovery, and training experience. After your assessment, we'll build a realistic weekly structure you can actually maintain.</p>
             </details>
           </div>
         </div>
@@ -352,8 +377,8 @@
         <h2 id="cta-heading" class="display-alt cta-band-headline cta-band-headline--split">
           Start with a<br class="cta-break"> <span class="muted-black">free assessment.</span>
         </h2>
-        <p class="cta-band-sub">We'll discuss your goals, training history, previous injuries, and current challenges, complete an introductory movement assessment, and determine the best next step for your training.</p>
-        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Schedule my free assessment</span></a>
+        <p class="cta-band-sub">Tell me where you are now. We'll figure out the best next step.</p>
+        <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
       </div>
     </section>
 
@@ -366,7 +391,6 @@
     <div class="container">
       <div class="footer-grid footer-grid--simple">
 
-        <!-- Branding -->
         <div>
           <a href="index.html" aria-label="Eric Nieves Coaching — Home">
             <img
@@ -375,7 +399,6 @@
               class="footer-logo-img"
               onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
             >
-            <!-- Text fallback until logo asset is added -->
             <div class="footer-logo-text" style="display:none">
               <span class="en">EN<span class="accent"> ·</span></span>
               <span class="sub">Eric Nieves Coaching</span>
@@ -387,12 +410,10 @@
           </p>
         </div>
 
-        <!-- Contact -->
         <div>
           <p class="display-alt footer-col-title">Contact</p>
 
           <div class="footer-contact-item">
-            <!-- Email icon -->
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -401,7 +422,6 @@
           </div>
 
           <div class="footer-contact-item">
-            <!-- Phone icon -->
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
@@ -409,7 +429,6 @@
           </div>
 
           <div class="footer-contact-item">
-            <!-- Location icon -->
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
               <circle cx="12" cy="10" r="3"/>
@@ -427,11 +446,11 @@
   </footer>
 
   <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+
   <!-- ============================================================
-       BOOKING MODAL — quick lead form, triggered by every
-       "free assessment" CTA. Submitting opens the visitor's email
-       client with a pre-filled message to Eric (mailto: — no
-       backend required). See main.js for the trigger/submit logic.
+       ASSESSMENT REQUEST MODAL
+       The current implementation opens the visitor's email app with a
+       pre-filled message. It does not submit to a server-side form.
   ============================================================ -->
   <div class="booking-modal" id="booking-modal" aria-hidden="true">
     <div class="booking-modal-overlay" data-booking-close></div>
@@ -443,10 +462,10 @@
       </button>
 
       <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Free assessment</p>
-      <h2 id="booking-modal-heading" class="display-alt booking-modal-heading">Book your session</h2>
-      <p class="booking-modal-email">Prefer email? Reach Eric directly at <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a></p>
+      <h2 id="booking-modal-heading" class="display-alt booking-modal-heading">Request your assessment</h2>
+      <p class="booking-modal-email">Fill this out and your email app will open with the request ready to send. Prefer email? Reach Eric directly at <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a></p>
 
-      <form id="booking-form" novalidate aria-label="Book a free assessment">
+      <form id="booking-form" novalidate aria-label="Request a free assessment">
 
         <div class="form-group">
           <label class="form-label" for="booking-name">Name <span aria-hidden="true">*</span></label>
@@ -494,7 +513,7 @@
             <option value="" selected>Select an option</option>
             <option value="In-Person">In-Person</option>
             <option value="Online">Online</option>
-            <option value="Hybrid (Online + Live Session)">Hybrid (Online + Live Session)</option>
+            <option value="Online + monthly live session">Online + monthly live session</option>
           </select>
         </div>
 
@@ -534,7 +553,7 @@
         <div class="form-submit-row">
           <button type="submit" class="btn btn-red btn-skew">
             <span class="btn-label">
-              Send request
+              Open email request
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -542,9 +561,8 @@
           </button>
         </div>
 
-        <!-- Shown after JS builds the mailto link -->
         <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">
-          Your request has been received. I'll contact you shortly to discuss your goals and schedule your assessment.
+          Your email app should now be open with the request ready to send. If it did not open, email eric@ericnievescoaching.com directly.
         </div>
 
       </form>
