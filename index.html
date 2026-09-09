@@ -12,505 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Saira+Condensed:ital,wght@1,800&family=Tomorrow:ital,wght@0,900;1,600;1,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <!-- Phase 2 homepage polish. Kept local on the redesign branch for easy review. -->
-  <style>
-    :root {
-      --section-tight: clamp(3.25rem, 6vw, 5.25rem);
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 1rem;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.74rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--red-bright);
-    }
-    .section-kicker::before {
-      content: '';
-      width: 28px;
-      height: 2px;
-      background: currentColor;
-      transform: skewX(-18deg);
-    }
-    .section-lead {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-      gap: 2rem;
-      align-items: end;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-    .section-lead .section-headline-2,
-    .section-lead .section-intro { margin-bottom: 0; }
-    .section-lead .section-intro { max-width: 34rem; justify-self: end; }
-
-    /* Compact audience strip */
-    .fit-strip {
-      background: var(--red-bright);
-      padding-block: clamp(1.5rem, 3.5vw, 2.4rem);
-      position: relative;
-      overflow: hidden;
-    }
-    .fit-strip::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(-65deg, transparent 0 12px, rgba(0,0,0,.05) 12px 13px);
-    }
-    .fit-strip-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem 2rem;
-      flex-wrap: wrap;
-    }
-    .fit-strip-label {
-      margin: 0;
-      flex: 0 0 auto;
-      color: var(--ink);
-      font-size: clamp(1.05rem, 2vw, 1.35rem);
-    }
-    .fit-strip-items {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      flex: 1 1 36rem;
-    }
-    .fit-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 38px;
-      padding: 0.55rem 0.9rem;
-      border-radius: 4px;
-      background: rgba(18, 18, 20, 0.25);
-      border: 1px solid rgba(255,255,255,.09);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.76rem;
-      line-height: 1.2;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-    }
-
-    /* Premium coaching cards */
-    .coaching-options {
-      position: relative;
-      padding-block: var(--section-tight);
-    }
-    .coaching-options::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line), transparent);
-    }
-    .coaching-options .process-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 1040px;
-      margin-inline: auto;
-      margin-top: 0;
-      gap: 1.25rem;
-    }
-    .service-card {
-      position: relative;
-      min-height: 360px;
-      overflow: hidden;
-      padding: clamp(1.75rem, 3vw, 2.35rem);
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(193,39,45,.16), transparent 38%),
-        var(--card-dark);
-      transition: transform var(--ease), border-color var(--ease), background var(--ease);
-    }
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(193,39,45,.72);
-    }
-    .service-card-number {
-      position: absolute;
-      top: 1rem;
-      right: 1.15rem;
-      font-family: 'Tomorrow', sans-serif;
-      font-style: italic;
-      font-weight: 900;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      line-height: .85;
-      color: rgba(255,255,255,.035);
-      pointer-events: none;
-    }
-    .service-kicker {
-      display: block;
-      margin-bottom: 0.85rem;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.17em;
-      color: var(--red-bright);
-    }
-    .service-card .who-card-title {
-      max-width: 22rem;
-      margin-bottom: 1rem;
-      font-family: 'Tomorrow', sans-serif;
-      font-style: italic;
-      font-weight: 800;
-      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-    .service-card .who-card-body {
-      max-width: 31rem;
-      font-size: 0.94rem;
-      line-height: 1.7;
-    }
-    .service-points {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .service-point {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.42rem 0.65rem;
-      border-radius: 3px;
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.06);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 500;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: rgba(255,255,255,.86);
-    }
-    .service-point::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--red-bright);
-      box-shadow: 0 0 0 3px rgba(193,39,45,.12);
-    }
-    .service-note {
-      margin-top: 1.35rem;
-      padding-top: 1.1rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.83rem;
-      color: var(--body-text);
-      line-height: 1.6;
-    }
-
-    /* Process becomes a sharper bridge section */
-    .process {
-      padding-block: var(--section-tight);
-      position: relative;
-      overflow: hidden;
-    }
-    .process::after {
-      content: 'PROGRESS';
-      position: absolute;
-      right: -1rem;
-      bottom: -0.16em;
-      font-family: 'Tomorrow', sans-serif;
-      font-style: italic;
-      font-weight: 900;
-      font-size: clamp(5rem, 17vw, 14rem);
-      line-height: .8;
-      color: rgba(0,0,0,.07);
-      pointer-events: none;
-    }
-    .process > .container { position: relative; z-index: 1; }
-    .process .process-grid { margin-top: 2.25rem; gap: 1rem; }
-    .process .process-card {
-      border: 1px solid rgba(255,255,255,.08);
-      padding: 1.65rem;
-      min-height: 210px;
-    }
-    .process .process-num {
-      font-size: 2.15rem;
-      color: rgba(255,255,255,.42);
-    }
-    .process .process-body { max-width: 29rem; }
-
-    /* Headshot-ready About */
-    .about {
-      padding-block: var(--section-tight);
-      position: relative;
-    }
-    .about .two-col {
-      grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
-      gap: clamp(2.75rem, 7vw, 6.5rem);
-      align-items: stretch;
-    }
-    .about-copy-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-block: 1rem;
-    }
-    .about-body p:first-child {
-      font-size: clamp(1.08rem, 1.6vw, 1.22rem);
-      line-height: 1.65;
-      color: rgba(255,255,255,.9);
-    }
-    .coach-portrait-shell {
-      min-height: 520px;
-      position: relative;
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(145deg, rgba(193,39,45,.12), transparent 35%),
-        var(--panel);
-      overflow: hidden;
-      border-radius: 6px;
-    }
-    .coach-portrait-shell::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.82));
-    }
-    .coach-portrait-shell img {
-      width: 100%;
-      height: 100%;
-      min-height: 520px;
-      object-fit: contain;
-      object-position: center;
-    }
-    .coach-photo-label {
-      position: absolute;
-      z-index: 2;
-      left: 1.3rem;
-      right: 1.3rem;
-      bottom: 1.25rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .coach-photo-name {
-      font-family: 'Tomorrow', sans-serif;
-      font-style: italic;
-      font-weight: 900;
-      font-size: clamp(1.45rem, 3vw, 2rem);
-      line-height: .95;
-      text-transform: uppercase;
-    }
-    .coach-photo-meta {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 500;
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .11em;
-      color: rgba(255,255,255,.62);
-      text-align: right;
-    }
-    .about-photo-wrap { display: none; }
-    .about-photo-band { display: none !important; }
-
-    /* Future testimonial/results shell — hidden until real client proof is available. */
-    .results-section[hidden] { display: none !important; }
-
-    /* Instagram-ready section */
-    .social-section {
-      background: #0d0d0f;
-      padding-block: var(--section-tight);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .social-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-    .social-header-copy { max-width: 43rem; }
-    .social-handle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: .11em;
-      color: var(--ink);
-      padding: .75rem 1rem;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      transition: border-color var(--ease), color var(--ease), transform var(--ease);
-      white-space: nowrap;
-    }
-    .social-handle:hover {
-      border-color: var(--red-bright);
-      color: var(--red-bright);
-      transform: translateY(-1px);
-    }
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-    .social-tile {
-      position: relative;
-      min-height: 260px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      background: var(--card-dark);
-      isolation: isolate;
-    }
-    .social-tile::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(150deg, rgba(193,39,45,.24), transparent 42%),
-        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
-    }
-    .social-tile:nth-child(2)::before {
-      background:
-        radial-gradient(circle at 75% 25%, rgba(193,39,45,.24), transparent 34%),
-        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
-    }
-    .social-tile:nth-child(3)::before {
-      background:
-        linear-gradient(35deg, rgba(193,39,45,.18), transparent 44%),
-        repeating-linear-gradient(-65deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
-    }
-    .social-tile-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.25rem;
-      background: linear-gradient(180deg, transparent 25%, rgba(10,10,11,.7));
-    }
-    .social-tile-icon {
-      position: absolute;
-      top: 1.15rem;
-      right: 1.15rem;
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: rgba(255,255,255,.82);
-    }
-    .social-tile-kicker {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      color: var(--red-bright);
-      margin-bottom: .45rem;
-    }
-    .social-tile-title {
-      font-family: 'Tomorrow', sans-serif;
-      font-style: italic;
-      font-weight: 800;
-      font-size: clamp(1.35rem, 2.8vw, 1.85rem);
-      line-height: 1;
-      text-transform: uppercase;
-    }
-    .social-note {
-      margin-top: 1rem;
-      max-width: 48rem;
-      font-size: .8rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,.45);
-    }
-
-    /* FAQ polish */
-    .faq-section {
-      background: var(--panel);
-      padding-block: var(--section-tight);
-    }
-    .faq-standalone {
-      margin-top: 0;
-      max-width: 900px;
-      margin-inline: auto;
-    }
-    .faq-heading { margin-bottom: 1rem; }
-    .faq-intro { margin-bottom: 2rem; max-width: 42rem; }
-    .faq-item {
-      border: 1px solid transparent;
-      transition: border-color var(--ease), background var(--ease);
-    }
-    .faq-item:hover,
-    .faq-item[open] { border-color: rgba(193,39,45,.34); }
-
-    /* CTA/footer finish */
-    .cta-band { padding-block: clamp(3.2rem, 6vw, 5.2rem); }
-    .cta-band-sub { max-width: 420px; }
-    .site-footer { position: relative; }
-    .site-footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(193,39,45,.65), transparent);
-    }
-
-    @media (max-width: 960px) {
-      .section-lead { grid-template-columns: 1fr; gap: 1rem; }
-      .section-lead .section-intro { justify-self: start; }
-      .coaching-options .process-grid { grid-template-columns: 1fr; }
-      .fit-strip-inner { align-items: flex-start; }
-      .fit-strip-items { justify-content: flex-start; }
-      .about .two-col { grid-template-columns: 1fr; }
-      .coach-portrait-shell { min-height: 430px; order: -1; }
-      .coach-portrait-shell img { min-height: 430px; }
-      .social-grid { grid-template-columns: 1fr 1fr; }
-      .social-tile:last-child { grid-column: 1 / -1; min-height: 220px; }
-    }
-
-    @media (max-width: 640px) {
-      .fit-chip { width: calc(50% - .3rem); justify-content: center; text-align: center; }
-      .service-card { min-height: auto; }
-      .service-card-number { font-size: 4.5rem; }
-      .coach-portrait-shell,
-      .coach-portrait-shell img { min-height: 360px; }
-      .coach-photo-label { align-items: flex-start; flex-direction: column; }
-      .coach-photo-meta { text-align: left; }
-      .social-header { align-items: flex-start; flex-direction: column; }
-      .social-grid { grid-template-columns: 1fr; }
-      .social-tile,
-      .social-tile:last-child { grid-column: auto; min-height: 220px; }
-    }
-  </style>
+  <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
 
   <main>
-
-    <!-- ============================================================
-         HERO
-    ============================================================ -->
     <section class="hero" aria-labelledby="hero-headline">
-
       <div class="hero-photo-wedge" aria-hidden="true">
         <img src="assets/hero-photo-wedge.png" alt="">
       </div>
@@ -526,27 +33,12 @@
         </nav>
 
         <a href="index.html" class="hero-logo" aria-label="Eric Nieves Coaching — Home">
-          <img
-            src="assets/logo-header.png"
-            alt="Eric Nieves Coaching"
-            height="42"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-          >
-          <span class="logo-text" style="display:none">
-            ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING
-          </span>
+          <img src="assets/logo-header.png" alt="Eric Nieves Coaching" height="42" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none">ERIC&nbsp;<span class="accent">NIEVES</span>&nbsp;COACHING</span>
         </a>
 
-        <button
-          type="button"
-          class="hero-hamburger"
-          aria-label="Open menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <span class="hero-hamburger-icon" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </span>
+        <button type="button" class="hero-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hero-hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
 
@@ -566,8 +58,7 @@
         </h1>
 
         <div class="hero-support">
-          <p class="section-intro">Build strength, move better, and train with confidence through personalized coaching in Lake Norman or online.</p>
-
+          <p class="section-intro">Personalized coaching for adults who want to rebuild strength, move with confidence, and stay capable with age. Come join the personal training studio -- either in Lake Norman or online.</p>
           <div class="hero-ctas">
             <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
             <a href="#coaching-options" class="btn btn-ghost btn-skew"><span class="btn-label">Explore coaching</span></a>
@@ -580,46 +71,39 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         QUICK FIT STRIP
-    ============================================================ -->
     <section class="fit-strip" aria-label="Who coaching is for">
       <div class="container fit-strip-inner">
-        <p class="display-alt footer-col-title fit-strip-label reveal">Coaching for</p>
+        <p class="display-alt footer-col-title fit-strip-label reveal">Coaching for...</p>
         <div class="fit-strip-items reveal">
-          <span class="fit-chip">Getting Stronger</span>
-          <span class="fit-chip">Returning From Injury</span>
-          <span class="fit-chip">Building Consistency</span>
-          <span class="fit-chip">Performance</span>
+          <span class="fit-chip">Strength After 55</span>
+          <span class="fit-chip">Getting Back Into Exercise</span>
+          <span class="fit-chip">Balance &amp; Stability</span>
+          <span class="fit-chip">Training Around Past Injuries</span>
+          <span class="fit-chip">Active &amp; Performance Goals</span>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         COACHING OPTIONS
-    ============================================================ -->
     <section class="coaching-options" id="coaching-options" aria-labelledby="coaching-options-heading">
       <div class="container">
-
         <div class="section-lead">
           <div>
             <span class="section-kicker reveal">Ways to work together</span>
             <h2 id="coaching-options-heading" class="display-alt section-headline-2 reveal">Choose how you want to train</h2>
           </div>
-          <p class="reveal section-intro">Personalized programming, professional guidance, and a clear path forward—whether we train together in Lake Norman or work remotely.</p>
         </div>
 
         <div class="process-grid">
-
           <article class="who-card service-card reveal">
             <span class="service-card-number" aria-hidden="true">01</span>
             <span class="service-kicker">Lake Norman, NC</span>
             <h3 class="who-card-title">In-Person Personal Training</h3>
-            <p class="who-card-body">Private one-on-one sessions built around your goals, experience, movement needs, and injury history. Learn proper technique, build strength, and progress with hands-on coaching.</p>
+            <p class="who-card-body">Private one-on-one coaching for adults who want to get stronger, move with more confidence, and build a routine they can keep. Sessions are scaled to your current ability, training history, and previous injuries.</p>
             <div class="service-points" aria-label="In-person coaching highlights">
-              <span class="service-point">1:1 Coaching</span>
-              <span class="service-point">Technique</span>
-              <span class="service-point">Progressive Training</span>
+              <span class="service-point">Strength Training</span>
+              <span class="service-point">Movement Quality</span>
+              <span class="service-point">Balance &amp; Confidence</span>
+              <span class="service-point">Individual Progression</span>
             </div>
           </article>
 
@@ -627,79 +111,108 @@
             <span class="service-card-number" aria-hidden="true">02</span>
             <span class="service-kicker">Train From Anywhere</span>
             <h3 class="who-card-title">Online Coaching</h3>
-            <p class="who-card-body">Personalized programming, exercise demonstrations, form review, regular check-ins, cardiovascular guidance, nutrition support, and ongoing messaging.</p>
+            <p class="who-card-body">A structured plan for training on your own with personalized programming, exercise demonstrations, form review, check-ins, and guidance for the habits that support your progress outside the gym.</p>
             <div class="service-points" aria-label="Online coaching highlights">
               <span class="service-point">Programming</span>
               <span class="service-point">Form Review</span>
-              <span class="service-point">Accountability</span>
+              <span class="service-point">Cardio Guidance</span>
+              <span class="service-point">Nutrition Support</span>
             </div>
             <p class="service-note"><strong>Want more hands-on support?</strong> Add a monthly in-person or virtual coaching session for technique work and program review.</p>
           </article>
+        </div>
 
+        <div class="program-scope reveal">
+          <div class="program-scope-head">
+            <div>
+              <span class="program-scope-kicker">More than a workout plan</span>
+              <h3 class="program-scope-title">Coaching for the whole week</h3>
+            </div>
+            <p class="program-scope-copy">Strength training is the anchor. Your coaching can also include practical nutrition consultation, home mobility work, and cardio education so the rest of your week supports the work we do in the gym.</p>
+          </div>
+          <div class="program-pillars" aria-label="Coaching program components">
+            <div class="program-pillar">
+              <span class="program-pillar-num">01</span>
+              <span class="program-pillar-title">Strength</span>
+              <span class="program-pillar-copy">Progressive resistance training built around your ability, goals, and experience.</span>
+            </div>
+            <div class="program-pillar">
+              <span class="program-pillar-num">02</span>
+              <span class="program-pillar-title">Home Mobility</span>
+              <span class="program-pillar-copy">Simple mobility and movement work you can use between sessions at home.</span>
+            </div>
+            <div class="program-pillar">
+              <span class="program-pillar-num">03</span>
+              <span class="program-pillar-title">Cardio Education</span>
+              <span class="program-pillar-copy">Learn how to use intensity, pacing, and weekly cardio to build useful fitness.</span>
+            </div>
+            <div class="program-pillar">
+              <span class="program-pillar-num">04</span>
+              <span class="program-pillar-title">Nutrition Consultation</span>
+              <span class="program-pillar-copy">Practical guidance for protein, meal structure, energy intake, and sustainable habits.</span>
+            </div>
+          </div>
         </div>
 
         <div class="coaching-options-cta">
           <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-red btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
         </div>
-
       </div>
     </section>
 
-    <!-- ============================================================
-         PROCESS
-    ============================================================ -->
     <section class="process" id="process" aria-labelledby="process-heading">
       <div class="container">
-
         <span class="section-kicker reveal" style="color:rgba(255,255,255,.76)">Simple by design</span>
         <h2 id="process-heading" class="display-alt section-headline-2 reveal">How it works</h2>
-        <p class="section-intro">Start where you are. Build a plan that fits. Adjust it as you progress.</p>
+        <p class="section-intro">No need to already be “in shape.” We establish your starting point, build a realistic plan, and progress it as your strength, confidence, and fitness improve.</p>
 
         <div class="process-grid">
-
           <article class="process-card reveal">
-            <span class="process-num" aria-hidden="true">01</span>
-            <h3 class="process-title">Assess</h3>
-            <p class="process-body">We identify your goals, training history, movement needs, and starting point.</p>
+            <div class="process-photo process-photo--assess" aria-hidden="true">
+              <img src="assets/hero-photo-band-small.jpg" alt="" loading="lazy">
+              <span class="process-photo-label">Starting point &amp; movement</span>
+            </div>
+            <div class="process-copy">
+              <span class="process-num" aria-hidden="true">01</span>
+              <h3 class="process-title">Assess</h3>
+              <p class="process-body">We learn your goals, training history, previous injuries, current routine, and movement needs so the plan starts at the right level.</p>
+            </div>
           </article>
 
           <article class="process-card reveal">
-            <span class="process-num" aria-hidden="true">02</span>
-            <h3 class="process-title">Plan</h3>
-            <p class="process-body">Your program is built around your body, schedule, experience, equipment, and goals.</p>
+            <div class="process-photo process-photo--plan" aria-hidden="true">
+              <img src="assets/mobile-hero-photo.png" alt="" loading="lazy">
+              <span class="process-photo-label">Personalized programming</span>
+            </div>
+            <div class="process-copy">
+              <span class="process-num" aria-hidden="true">02</span>
+              <h3 class="process-title">Plan</h3>
+              <p class="process-body">Your strength work, home mobility, cardio, and nutrition priorities are organized into a realistic plan that fits your week.</p>
+            </div>
           </article>
 
           <article class="process-card reveal">
-            <span class="process-num" aria-hidden="true">03</span>
-            <h3 class="process-title">Coach</h3>
-            <p class="process-body">We refine technique, track progress, and adjust the plan as you get stronger and more capable.</p>
+            <div class="process-photo process-photo--coach" aria-hidden="true">
+              <img src="assets/about-photo-wedge.png" alt="" loading="lazy">
+              <span class="process-photo-label">Hands-on guidance</span>
+            </div>
+            <div class="process-copy">
+              <span class="process-num" aria-hidden="true">03</span>
+              <h3 class="process-title">Coach</h3>
+              <p class="process-body">We practice, progress, and adjust. You learn what you are doing and why so you become more confident and capable over time.</p>
+            </div>
           </article>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         RESULTS / TESTIMONIALS — READY FOR REAL CLIENT PROOF
-         Remove `hidden` once approved testimonials and/or client photos
-         are available. The shell is intentionally non-public for now.
-    ============================================================ -->
     <section class="results-section" id="results" hidden aria-labelledby="results-heading">
       <div class="container">
         <span class="section-kicker">Client results</span>
         <h2 id="results-heading" class="display-alt section-headline-2">Real progress, real people</h2>
-        <!-- Future content pattern:
-          <article class="testimonial-card">
-            <blockquote>Approved client testimonial here.</blockquote>
-            <p>Client name / goal / duration</p>
-          </article>
-        -->
       </div>
     </section>
 
-    <!-- ============================================================
-         ABOUT
-    ============================================================ -->
     <section class="about" id="about" aria-labelledby="about-heading">
       <div class="container">
         <div class="section-lead">
@@ -707,19 +220,14 @@
             <span class="section-kicker reveal">Your coach</span>
             <h2 id="about-heading" class="display-alt section-headline-2 reveal">Meet Eric Nieves</h2>
           </div>
-          <p class="section-intro reveal">Training should make you more capable—not leave you dependent on a coach forever.</p>
+          <p class="section-intro reveal">Especially focused on helping adults 55+ and people returning to exercise build the strength and physical capacity to keep doing more—not less.</p>
         </div>
 
         <div class="two-col">
-
           <div class="about-copy-panel reveal-left">
             <div class="about-body">
-              <p>
-                I'm Eric Nieves, a NASM Certified Personal Trainer specializing in strength development, corrective exercise, and helping people train confidently while accounting for previous injuries and movement limitations.
-              </p>
-              <p>
-                With a B.S. in Biology and experience in rehabilitation-focused settings, I connect movement quality with effective strength and fitness training. My goal is simple: give you the right plan, teach you how to execute it confidently, and help you become stronger and more capable over time.
-              </p>
+              <p>I’m Eric Nieves, a NASM Certified Personal Trainer. I help adults build strength, move better, and return to consistent exercise with confidence. My approach also accounts for past injuries and individual movement limitations.</p>
+              <p>With a B.S. in Biology and experience in rehabilitation-focused settings, I connect movement quality with effective strength and fitness training. Coaching can extend beyond the session with home mobility work, cardio education, and practical nutrition guidance so you have a plan for the whole week—not just the hour we train.</p>
             </div>
 
             <div class="about-credentials">
@@ -733,7 +241,6 @@
             </div>
           </div>
 
-          <!-- Headshot-ready shell. Replace src with the future professional portrait. -->
           <div class="coach-portrait-shell reveal-right" aria-label="Eric Nieves coaching portrait">
             <img src="assets/about-photo-wedge.png" alt="Eric Nieves" loading="lazy">
             <div class="coach-photo-label">
@@ -741,24 +248,17 @@
               <span class="coach-photo-meta">CPT · CES · CNC<br>Lake Norman, NC</span>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         FROM THE GYM / INSTAGRAM-READY
-         This is a branded content shell now. Later, replace the tile
-         interiors from an Instagram/API integration without redesigning
-         the section or changing its overall footprint.
-    ============================================================ -->
     <section class="social-section" id="social" aria-labelledby="social-heading">
       <div class="container">
         <div class="social-header">
           <div class="social-header-copy">
             <span class="section-kicker reveal">From the gym</span>
-            <h2 id="social-heading" class="display-alt section-headline-2 reveal">Training in real life</h2>
-            <p class="section-intro reveal">Training clips, coaching ideas, exercise breakdowns, and the work behind the program.</p>
+            <h2 id="social-heading" class="display-alt section-headline-2 reveal">A View Inside My Coaching</h2>
+            <p class="section-intro reveal">Follow me on Instagram to stay updated with training clips, coaching ideas, exercise breakdowns, and the work behind the program.</p>
           </div>
 
           <a class="social-handle reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="Follow Eric Nieves Fitness on Instagram">
@@ -773,186 +273,108 @@
 
         <div class="social-grid" data-instagram-feed>
           <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View training content on Instagram">
-            <span class="social-tile-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </span>
-            <span class="social-tile-inner">
-              <span class="social-tile-kicker">Training</span>
-              <span class="social-tile-title">The work</span>
-            </span>
+            <span class="social-tile-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
+            <span class="social-tile-inner"><span class="social-tile-kicker">Training</span><span class="social-tile-title">The work</span></span>
           </a>
 
           <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View coaching content on Instagram">
-            <span class="social-tile-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path><path d="M8 7h8M8 11h8"></path></svg>
-            </span>
-            <span class="social-tile-inner">
-              <span class="social-tile-kicker">Coaching</span>
-              <span class="social-tile-title">Why we train it</span>
-            </span>
+            <span class="social-tile-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path><path d="M8 7h8M8 11h8"></path></svg></span>
+            <span class="social-tile-inner"><span class="social-tile-kicker">Coaching</span><span class="social-tile-title">Why we train it</span></span>
           </a>
 
           <a class="social-tile reveal" href="https://www.instagram.com/enieves.fit/" target="_blank" rel="noopener noreferrer" aria-label="View behind-the-scenes content on Instagram">
-            <span class="social-tile-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8M12 8v8"></path></svg>
-            </span>
-            <span class="social-tile-inner">
-              <span class="social-tile-kicker">Behind the scenes</span>
-              <span class="social-tile-title">Beyond the program</span>
-            </span>
+            <span class="social-tile-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8M12 8v8"></path></svg></span>
+            <span class="social-tile-inner"><span class="social-tile-kicker">Behind the scenes</span><span class="social-tile-title">Beyond the program</span></span>
           </a>
         </div>
-
-        <p class="social-note">This section is structured for a future Instagram feed integration. For now it intentionally links to the profile rather than displaying fabricated or stale post data.</p>
       </div>
     </section>
 
-    <!-- ============================================================
-         FAQ
-    ============================================================ -->
     <section class="faq-section" id="faq" aria-labelledby="faq-heading">
       <div class="container">
         <div class="faq faq-standalone">
           <span class="section-kicker reveal">Before you start</span>
           <h2 id="faq-heading" class="display-alt section-headline-2 faq-heading reveal">Frequently asked questions</h2>
-          <p class="section-intro faq-intro reveal">A few practical details before getting started.</p>
 
           <div class="faq-list">
             <details class="faq-item">
-              <summary class="faq-question">
-                Where is in-person training located?
-                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </summary>
+              <summary class="faq-question">Where is in-person training located?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <p class="faq-answer">In-person coaching is available in the Lake Norman area. Exact location details are provided when an assessment is arranged.</p>
             </details>
 
             <details class="faq-item">
-              <summary class="faq-question">
-                Can I train if I have a previous injury?
-                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </summary>
+              <summary class="faq-question">Can I train if I have a previous injury?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <p class="faq-answer">Training can often be modified around previous injuries and movement limitations. Medical clearance may be requested when appropriate.</p>
             </details>
 
             <details class="faq-item">
-              <summary class="faq-question">
-                What happens during the free assessment?
-                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </summary>
+              <summary class="faq-question">What happens during the free assessment?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <p class="faq-answer">We'll discuss your goals, training history, previous injuries, current routine, and what has been getting in the way. From there, we'll determine the most useful next step for your training.</p>
             </details>
 
             <details class="faq-item">
-              <summary class="faq-question">
-                How often should I train?
-                <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
-                </svg>
-              </summary>
+              <summary class="faq-question">How often should I train?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <p class="faq-answer">That depends on your goals, schedule, recovery, and training experience. After your assessment, we'll build a realistic weekly structure you can actually maintain.</p>
+            </details>
+
+            <details class="faq-item" id="faq-complete-program">
+              <summary class="faq-question">Is coaching only strength training?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+              <p class="faq-answer">Strength training is the foundation, but coaching can also include home mobility work, cardiovascular education and programming, and practical nutrition consultation based on your goals and needs.</p>
             </details>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         CTA BAND
-    ============================================================ -->
     <section class="cta-band" aria-labelledby="cta-heading">
       <div class="cta-band-texture" aria-hidden="true"></div>
       <div class="container cta-band-inner">
-        <h2 id="cta-heading" class="display-alt cta-band-headline cta-band-headline--split">
-          Start with a<br class="cta-break"> <span class="muted-black">free assessment.</span>
-        </h2>
-        <p class="cta-band-sub">Tell me where you are now. We'll figure out the best next step.</p>
+        <h2 id="cta-heading" class="display-alt cta-band-headline cta-band-headline--split">Start with a<br class="cta-break"> <span class="muted-black">free assessment.</span></h2>
+        <p class="cta-band-sub">We’ll talk through your goals, current ability, training history, and what you want to be able to do more confidently. Then we’ll map out the right next step.</p>
         <a href="mailto:eric@ericnievescoaching.com?subject=Free%20assessment%20request" class="btn btn-white btn-skew" data-booking-trigger><span class="btn-label">Request a free assessment</span></a>
       </div>
     </section>
-
   </main>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer class="site-footer" id="contact" role="contentinfo">
     <div class="container">
       <div class="footer-grid footer-grid--simple">
-
         <div>
           <a href="index.html" aria-label="Eric Nieves Coaching — Home">
-            <img
-              src="assets/logo-header.png"
-              alt="Eric Nieves Coaching"
-              class="footer-logo-img"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-            >
-            <div class="footer-logo-text" style="display:none">
-              <span class="en">EN<span class="accent"> ·</span></span>
-              <span class="sub">Eric Nieves Coaching</span>
-            </div>
+            <img src="assets/logo-header.png" alt="Eric Nieves Coaching" class="footer-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div class="footer-logo-text" style="display:none"><span class="en">EN<span class="accent"> ·</span></span><span class="sub">Eric Nieves Coaching</span></div>
           </a>
-          <p class="footer-blurb">
-            Personal training and coaching in the Lake Norman area of Charlotte, NC.
-            Built around your life, your body, and your goals.
-          </p>
+          <p class="footer-blurb">Personal training and coaching in the Lake Norman area of Charlotte, NC. Built around your life, your body, and your goals.</p>
         </div>
 
         <div>
           <p class="display-alt footer-col-title">Contact</p>
-
           <div class="footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a>
           </div>
-
           <div class="footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <a href="tel:+9148178153">(914) 817-8153</a>
           </div>
-
           <div class="footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             Lake Norman, NC
           </div>
         </div>
-
       </div>
 
-      <div class="footer-bottom">
-        <p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><p class="footer-copy">&copy; <span id="yr"></span> Eric Nieves Coaching. All rights reserved.</p></div>
     </div>
   </footer>
 
   <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 
-  <!-- ============================================================
-       ASSESSMENT REQUEST MODAL
-       The current implementation opens the visitor's email app with a
-       pre-filled message. It does not submit to a server-side form.
-  ============================================================ -->
   <div class="booking-modal" id="booking-modal" aria-hidden="true">
     <div class="booking-modal-overlay" data-booking-close></div>
     <div class="booking-modal-panel" role="dialog" aria-modal="true" aria-labelledby="booking-modal-heading">
       <button type="button" class="booking-modal-close" data-booking-close aria-label="Close">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M18 6 6 18M6 6l12 12"/>
-        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
 
       <p class="eyebrow"><span class="rule" aria-hidden="true"></span>Free assessment</p>
@@ -960,7 +382,6 @@
       <p class="booking-modal-email">Fill this out and your email app will open with the request ready to send. Prefer email? Reach Eric directly at <a href="mailto:eric@ericnievescoaching.com">eric@ericnievescoaching.com</a></p>
 
       <form id="booking-form" novalidate aria-label="Request a free assessment">
-
         <div class="form-group">
           <label class="form-label" for="booking-name">Name <span aria-hidden="true">*</span></label>
           <input class="form-input" type="text" id="booking-name" name="name" autocomplete="name" placeholder="Your name" required>
@@ -1004,19 +425,11 @@
 
         <div class="form-submit-row">
           <button type="submit" class="btn btn-red btn-skew">
-            <span class="btn-label">
-              Open email request
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </span>
+            <span class="btn-label">Open email request <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </button>
         </div>
 
-        <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">
-          Your email app should now be open with the request ready to send. If it did not open, email eric@ericnievescoaching.com directly.
-        </div>
-
+        <div id="booking-form-confirmation" class="form-confirmation" role="status" aria-live="polite">Your email app should now be open with the request ready to send. If it did not open, email eric@ericnievescoaching.com directly.</div>
       </form>
     </div>
   </div>
