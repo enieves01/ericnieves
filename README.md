@@ -4,14 +4,24 @@ Marketing site for Eric Nieves, personal trainer in the Lake Norman area of Char
 
 ---
 
+## Positioning
+
+Primary audience: adults 55+ and people returning to structured exercise after time away, while keeping the offer broad enough for general strength, fitness, and performance goals.
+
+The coaching offer is intentionally broader than a workout program. Strength training is the anchor, with support that may also include home mobility work, cardio education/programming, and practical nutrition consultation.
+
+---
+
 ## File structure
 
 ```
 eric-nieves-coaching/
-├── assets/                 ← Drop logo & photo files here (see below)
-├── index.html              ← The entire site (one page)
-├── style.css               ← All styles + CSS variables
-├── main.js                 ← Scroll reveal, booking modal
+├── assets/                 ← Logo & photo files
+├── index.html              ← Homepage
+├── assessment.html         ← Assessment information page
+├── links.html              ← Link-in-bio page
+├── style.css               ← Shared styles + CSS variables
+├── main.js                 ← Navigation, homepage refinements, scroll reveal, booking modal
 └── README.md
 ```
 
@@ -33,29 +43,43 @@ npx serve .
 
 ---
 
-## Adding logo & photo assets
+## Homepage redesign branch notes
 
-Drop the following files into `assets/`. The HTML already references these exact paths:
+The `homepage-simplification` branch contains the current redesign work. It includes:
 
-| File | Where it's used |
-|---|---|
-| `assets/logo-header.png` | Nav, inside the hero |
-| `assets/logo-stacked.png` | Footer |
-| `assets/logo-circle.png` | Spare (not currently placed) |
-| `assets/portrait-hero.jpg` | Hero section on the home page |
-| `assets/portrait-about.jpg` | About section on the home page |
+- Concise homepage messaging and fewer redundant sections
+- Stronger 55+ / returning-to-exercise positioning without excluding broader audiences
+- Larger assessment CTAs
+- Two primary coaching offers: in-person and online
+- A four-pillar coaching-system block: Strength, Home Mobility, Cardio Education, Nutrition Consultation
+- A visual Assess → Plan → Coach process with temporary existing site imagery ready to be replaced by purpose-shot photos
+- Headshot-ready About section
+- Hidden testimonials/results shell for future approved client proof
+- Instagram-ready social section for a future feed integration
 
-Each `<img>` has an `onerror` fallback that shows a text version of the logo if the image file is missing, so the site is fully functional before assets are added.
+Once the design is approved, the temporary redesign CSS/DOM refinements should be consolidated out of `index.html` / `main.js` into the shared stylesheet and semantic page markup.
+
+---
+
+## Adding/replacing photo assets
+
+Current redesign uses existing images as placeholders in several places. Future photo priorities:
+
+1. Professional gym headshot for About
+2. Assessment / movement-screen photo
+3. Programming / plan-building photo
+4. Coaching / exercise-instruction photo
+5. Client/training photos for testimonials and results
+
+Keep filenames stable where possible or update references in `index.html` / `main.js`.
 
 ---
 
 ## Booking / contact flow
 
-Every "free assessment" CTA (`[data-booking-trigger]`) opens a modal (`#booking-modal` in `index.html`, logic in `main.js`) instead of navigating anywhere — a centered overlay above 768px, full-screen below it. Name, phone, email, and message go into a `mailto:` link built at submit time, which hands off to the visitor's own email app addressed to `eric@ericnievescoaching.com`. No backend, form service, or account signup required.
+Every assessment CTA (`[data-booking-trigger]`) opens a modal (`#booking-modal` in `index.html`, logic in `main.js`) instead of navigating away. The current implementation builds a `mailto:` link from the form fields and opens the visitor's own email app addressed to `eric@ericnievescoaching.com`.
 
-Each trigger keeps its `href` as a plain `mailto:` link too, so the CTA still works if JavaScript fails to load.
-
-To point submissions somewhere else, change the address in the `mailto:` template literal inside the booking-modal `submit` handler in `main.js`.
+This is a lead-request flow, not live calendar scheduling and not a server-side form submission.
 
 ---
 
@@ -65,21 +89,18 @@ To point submissions somewhere else, change the address in the `mailto:` templat
 ```bash
 npx vercel
 ```
-Select "no framework" when prompted. Vercel serves static HTML/CSS/JS with no configuration needed.
+Select "no framework" when prompted.
 
 ### Netlify
-Drag and drop the project folder onto [app.netlify.com](https://app.netlify.com), or:
 ```bash
 npx netlify-cli deploy --prod --dir .
 ```
-
-No `vercel.json` or `netlify.toml` is required for a plain static site.
 
 ---
 
 ## Brand & design notes
 
-- **Colors:** defined as CSS variables in `:root` inside `style.css`. Change `--red` / `--red-bright` to tweak the crimson accent globally.
-- **Fonts:** loaded from Google Fonts — Tomorrow (display/headlines), Saira Condensed (secondary display), Oswald (labels/nav), Inter (body).
-- **Scroll animations:** `IntersectionObserver` adds `.in` to `.reveal` / `.reveal-left` / `.reveal-right` elements. Automatically disabled when `prefers-reduced-motion` is set.
-- **Mobile breakpoints:** the hero's side photo reflows into a full-width band and the nav centers below `≤970px`; portrait images hide and two-column layouts collapse at `≤960px`; the booking modal goes full-screen at `≤768px`.
+- **Colors:** CSS variables in `:root` inside `style.css`; primary accent is red.
+- **Fonts:** Google Fonts — Tomorrow (display/headlines), Saira Condensed (secondary display), Oswald (labels/nav), Inter (body).
+- **Scroll animations:** `IntersectionObserver` adds `.in` to reveal elements and respects `prefers-reduced-motion`.
+- **Mobile:** responsive layouts collapse service/process/social grids and expand primary assessment CTAs for easier tapping.
