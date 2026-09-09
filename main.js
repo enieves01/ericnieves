@@ -107,8 +107,6 @@
       </div>
     </div>
 
-    <p class="booking-contact-note" id="booking-contact-note">Please provide an email address or phone number so I can follow up.</p>
-
     <div class="form-group">
       <label class="form-label" for="booking-coaching-option">Interested in <span aria-hidden="true">*</span></label>
       <select class="form-input form-select" id="booking-coaching-option" name="coaching_option" required>
@@ -121,7 +119,7 @@
 
     <div class="form-group">
       <label class="form-label" for="booking-goals">What are you hoping to work on? <span aria-hidden="true">*</span></label>
-      <textarea class="form-input" id="booking-goals" name="goals" rows="4" placeholder="A sentence or two is plenty." required></textarea>
+      <textarea class="form-input" id="booking-goals" name="goals" rows="4" placeholder="A sentence or two describing your goals and any previous fitness experience" required></textarea>
     </div>
 
     <div class="form-submit-row">
