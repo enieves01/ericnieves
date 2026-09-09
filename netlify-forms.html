@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>Form Definitions</title>
+</head>
+<body>
+  <!-- Netlify build-time form definition for the assessment modal. -->
+  <form name="assessment-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="assessment-request">
+    <input type="hidden" name="subject" value="New free assessment request from Eric Nieves Coaching">
+    <input name="bot-field">
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="tel" name="phone">
+    <select name="coaching_option">
+      <option value="In-Person">In-person coaching</option>
+      <option value="Online">Online coaching</option>
+      <option value="Not sure">Not sure yet</option>
+    </select>
+    <textarea name="goals"></textarea>
+  </form>
+</body>
+</html>
