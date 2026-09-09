@@ -2,14 +2,10 @@
    MAIN.JS
    ============================================================ */
 
-/* --- Hamburger / mobile menu ------------------------------------
-   Toggles .open on #mobile-menu and aria-expanded on .hero-hamburger
-   (the icon's bars-to-X morph is pure CSS, keyed off aria-expanded).
-   Closes on Escape, on any menu link click, or the button itself.
----------------------------------------------------------------- */
+/* --- Hamburger / mobile menu -------------------------------- */
 ;(function () {
   const button = document.querySelector('.hero-hamburger');
-  const menu   = document.getElementById('mobile-menu');
+  const menu = document.getElementById('mobile-menu');
   if (!button || !menu) return;
 
   function close() {
@@ -30,7 +26,6 @@
   });
 
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
-
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && menu.classList.contains('open')) {
       close();
@@ -39,17 +34,11 @@
   });
 })();
 
-/* --- Phase 2.1 audience + coaching-system refinement ------------
-   This redesign branch is still intentionally easy to iterate on.
-   These DOM/content refinements target the primary 55+ / returning-to-
-   exercise audience while keeping the offer broad enough for other
-   strength, fitness, and performance goals.
----------------------------------------------------------------- */
+/* --- Phase 2 audience + coaching-system refinement ----------- */
 ;(function () {
   const style = document.createElement('style');
-  style.id = 'phase-2-1-audience-polish';
+  style.id = 'phase-2-audience-polish';
   style.textContent = `
-    /* Assessment CTAs: larger, more obvious, still consistent with brand */
     .btn[data-booking-trigger] {
       min-height: 56px;
       padding: 1.02rem 2.35rem;
@@ -66,13 +55,8 @@
       box-shadow: 0 14px 34px rgba(0,0,0,.22), 0 0 0 1px rgba(255,255,255,.12);
     }
 
-    /* Audience strip: larger, card-based, intentionally legible for 55+ */
-    .fit-strip {
-      padding-block: clamp(2.25rem, 4.5vw, 3.4rem);
-    }
-    .fit-strip-inner {
-      display: block;
-    }
+    .fit-strip { padding-block: clamp(2.25rem, 4.5vw, 3.4rem); }
+    .fit-strip-inner { display: block; }
     .fit-strip-label {
       display: block;
       margin-bottom: 1.35rem;
@@ -145,16 +129,13 @@
       background: rgba(255,255,255,.52);
     }
 
-    /* Complete coaching-system layer */
     .program-scope {
       max-width: 1040px;
       margin: clamp(2.2rem, 5vw, 3.5rem) auto 0;
       padding: clamp(1.5rem, 3vw, 2rem);
       border: 1px solid var(--line);
       border-radius: 5px;
-      background:
-        linear-gradient(120deg, rgba(193,39,45,.09), transparent 35%),
-        #101012;
+      background: linear-gradient(120deg, rgba(193,39,45,.09), transparent 35%), #101012;
     }
     .program-scope-head {
       display: grid;
@@ -226,7 +207,6 @@
       color: rgba(255,255,255,.58);
     }
 
-    /* Process: larger type + visual photo layer */
     .process .section-headline-2 {
       font-size: clamp(2.8rem, 5.7vw, 4rem);
       margin-bottom: 1.15rem;
@@ -350,10 +330,10 @@
     fitItems.innerHTML = audiences.map(item => `<span class="fit-chip">${item}</span>`).join('');
   }
 
+  /* The old coaching intro repeated the same positioning now covered by
+     the audience strip and the whole-week coaching block, so remove it. */
   const coachingIntro = document.querySelector('.coaching-options .section-lead .section-intro');
-  if (coachingIntro) {
-    coachingIntro.textContent = 'A program designed especially for adults 55+ wanting to build muscle, avoid injury, and lose weight. We teach fitness as a lifestyle while still working towards performance goals. Strength is the anchor; the rest of the plan supports it.';
-  }
+  if (coachingIntro) coachingIntro.remove();
 
   const serviceCards = document.querySelectorAll('.service-card');
   if (serviceCards[0]) {
@@ -471,11 +451,22 @@
 
   const aboutParagraphs = document.querySelectorAll('.about-body p');
   if (aboutParagraphs[0]) {
-    aboutParagraphs[0].textContent = 'I’m Eric Nieves, a NASM Certified Personal Trainer specializing in strength development, corrective exercise, and helping adults train confidently while accounting for previous injuries, movement limitations, and long periods away from structured exercise.';
+    aboutParagraphs[0].textContent = 'I’m Eric Nieves, a NASM Certified Personal Trainer. I help adults build strength, move better, and return to consistent exercise with confidence. My approach also accounts for past injuries and individual movement limitations.';
   }
   if (aboutParagraphs[1]) {
     aboutParagraphs[1].textContent = 'With a B.S. in Biology and experience in rehabilitation-focused settings, I connect movement quality with effective strength and fitness training. Coaching can extend beyond the session with home mobility work, cardio education, and practical nutrition guidance so you have a plan for the whole week—not just the hour we train.';
   }
+
+  const socialHeading = document.getElementById('social-heading');
+  if (socialHeading) socialHeading.textContent = 'A View Inside My Coaching';
+
+  const socialIntro = document.querySelector('.social-header-copy .section-intro');
+  if (socialIntro) {
+    socialIntro.textContent = 'Follow me on Instagram to stay updated with training clips, coaching ideas, exercise breakdowns, and the work behind the program.';
+  }
+
+  const faqIntro = document.querySelector('.faq-intro');
+  if (faqIntro) faqIntro.remove();
 
   const faqList = document.querySelector('.faq-list');
   if (faqList && !document.getElementById('faq-complete-program')) {
@@ -500,32 +491,25 @@
   }
 })();
 
-/* --- Scroll reveal (IntersectionObserver) ---------------------
-   Adds .in to .reveal / .reveal-left / .reveal-right elements
-   when they enter the viewport. Siblings are staggered by 80ms.
-   Skipped entirely when prefers-reduced-motion is set.
----------------------------------------------------------------- */
+/* --- Scroll reveal ------------------------------------------ */
 ;(function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const selector = '.reveal, .reveal-left, .reveal-right';
-  const targets   = document.querySelectorAll(selector);
+  const targets = document.querySelectorAll(selector);
   if (!targets.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
-      const parent   = entry.target.parentElement;
+      const parent = entry.target.parentElement;
       const siblings = parent
         ? [...parent.children].filter(el => el.matches(selector))
         : [entry.target];
       const idx = siblings.indexOf(entry.target);
 
-      setTimeout(() => {
-        entry.target.classList.add('in');
-      }, Math.max(0, idx) * 80);
-
+      setTimeout(() => entry.target.classList.add('in'), Math.max(0, idx) * 80);
       observer.unobserve(entry.target);
     });
   }, { threshold: 0.1 });
@@ -533,18 +517,12 @@
   targets.forEach(el => observer.observe(el));
 })();
 
-/* --- Booking modal ---------------------------------------------
-   Every "free assessment" CTA (marked with [data-booking-trigger])
-   opens this modal. The href is left in place as a no-JS fallback
-   (a plain mailto: link). Submitting builds a mailto: link from the
-   form fields so the visitor's own email app sends the request
-   straight to Eric; no backend required.
----------------------------------------------------------------- */
+/* --- Booking modal ----------------------------------------- */
 ;(function () {
-  const modal        = document.getElementById('booking-modal');
-  const form         = document.getElementById('booking-form');
+  const modal = document.getElementById('booking-modal');
+  const form = document.getElementById('booking-form');
   const confirmation = document.getElementById('booking-form-confirmation');
-  const triggers     = document.querySelectorAll('[data-booking-trigger]');
+  const triggers = document.querySelectorAll('[data-booking-trigger]');
   if (!modal || !form || !triggers.length) return;
 
   const closers = modal.querySelectorAll('[data-booking-close]');
@@ -576,37 +554,32 @@
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-
     if (!form.reportValidity()) return;
 
-    const name           = form.querySelector('#booking-name').value.trim();
-    const email          = form.querySelector('#booking-email').value.trim();
-    const phone          = form.querySelector('#booking-phone').value.trim();
+    const name = form.querySelector('#booking-name').value.trim();
+    const email = form.querySelector('#booking-email').value.trim();
+    const phone = form.querySelector('#booking-phone').value.trim();
     const coachingOption = form.querySelector('#booking-coaching-option').value.trim();
-    const goal           = form.querySelector('#booking-goal').value.trim();
-    const injuries       = form.querySelector('#booking-injuries').value.trim();
-    const schedule       = form.querySelector('#booking-schedule').value.trim();
+    const goal = form.querySelector('#booking-goal').value.trim();
+    const injuries = form.querySelector('#booking-injuries').value.trim();
+    const schedule = form.querySelector('#booking-schedule').value.trim();
 
     const subject = `Free assessment request — ${name}`;
-
     const lines = [
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`
     ];
     if (coachingOption) lines.push(`Preferred coaching option: ${coachingOption}`);
-    if (goal)           lines.push(`Primary fitness goal: ${goal}`);
-    if (injuries)       lines.push(`Previous injuries or limitations: ${injuries}`);
-    if (schedule)       lines.push(`Preferred training days and times: ${schedule}`);
-
-    const body = lines.join('\n');
+    if (goal) lines.push(`Primary fitness goal: ${goal}`);
+    if (injuries) lines.push(`Previous injuries or limitations: ${injuries}`);
+    if (schedule) lines.push(`Preferred training days and times: ${schedule}`);
 
     const mailto = `mailto:eric@ericnievescoaching.com`
       + `?subject=${encodeURIComponent(subject)}`
-      + `&body=${encodeURIComponent(body)}`;
+      + `&body=${encodeURIComponent(lines.join('\n'))}`;
 
     window.location.href = mailto;
-
     confirmation.classList.add('visible');
     form.reset();
     confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
