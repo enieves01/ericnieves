@@ -66,18 +66,83 @@
       box-shadow: 0 14px 34px rgba(0,0,0,.22), 0 0 0 1px rgba(255,255,255,.12);
     }
 
-    /* Audience strip: intentionally more legible for the core 55+ audience */
-    .fit-strip { padding-block: clamp(1.9rem, 4vw, 3rem); }
-    .fit-strip-label {
-      font-size: clamp(1.45rem, 3vw, 2.05rem);
-      line-height: 1;
+    /* Audience strip: larger, card-based, intentionally legible for 55+ */
+    .fit-strip {
+      padding-block: clamp(2.25rem, 4.5vw, 3.4rem);
     }
-    .fit-strip-items { gap: .72rem; }
+    .fit-strip-inner {
+      display: block;
+    }
+    .fit-strip-label {
+      display: block;
+      margin-bottom: 1.35rem;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: .95;
+    }
+    .fit-strip-items {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .75rem;
+      width: 100%;
+    }
     .fit-chip {
-      min-height: 47px;
-      padding: .7rem 1rem;
-      font-size: clamp(.86rem, 1.2vw, .98rem);
-      letter-spacing: .065em;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 82px;
+      padding: 1.05rem .9rem;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(10,10,11,.34);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 8px 22px rgba(0,0,0,.08);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: clamp(.92rem, 1.25vw, 1.05rem);
+      line-height: 1.28;
+      text-transform: uppercase;
+      text-align: center;
+      letter-spacing: .055em;
+      color: var(--ink);
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+    .fit-chip::before {
+      position: absolute;
+      top: .42rem;
+      left: .58rem;
+      font-family: 'Tomorrow', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: .67rem;
+      letter-spacing: .06em;
+      color: rgba(255,255,255,.36);
+    }
+    .fit-chip:nth-child(1)::before { content: '01'; }
+    .fit-chip:nth-child(2)::before { content: '02'; }
+    .fit-chip:nth-child(3)::before { content: '03'; }
+    .fit-chip:nth-child(4)::before { content: '04'; }
+    .fit-chip:nth-child(5)::before { content: '05'; }
+    .fit-chip::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(255,255,255,.18);
+      transform: scaleX(.28);
+      transform-origin: center;
+      transition: transform var(--ease), background var(--ease);
+    }
+    .fit-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(10,10,11,.44);
+      border-color: rgba(255,255,255,.24);
+    }
+    .fit-chip:hover::after {
+      transform: scaleX(.72);
+      background: rgba(255,255,255,.52);
     }
 
     /* Complete coaching-system layer */
@@ -238,6 +303,8 @@
     }
 
     @media (max-width: 960px) {
+      .fit-strip-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fit-chip:last-child { grid-column: 1 / -1; }
       .program-scope-head { grid-template-columns: 1fr; }
       .program-scope-copy { justify-self: start; }
       .program-pillars { grid-template-columns: 1fr 1fr; }
@@ -248,7 +315,13 @@
         min-height: 58px;
         padding-inline: 1.2rem;
       }
-      .fit-chip { width: 100%; min-height: 50px; }
+      .fit-strip-items { grid-template-columns: 1fr; }
+      .fit-chip,
+      .fit-chip:last-child {
+        grid-column: auto;
+        width: 100%;
+        min-height: 64px;
+      }
       .program-pillars { grid-template-columns: 1fr; }
       .program-pillar { min-height: auto; }
       .process .process-card { min-height: auto; }
@@ -259,18 +332,18 @@
 
   const heroIntro = document.querySelector('.hero-support .section-intro');
   if (heroIntro) {
-    heroIntro.textContent = 'Personalized coaching for adults who want to rebuild strength, move with confidence, and stay capable—especially adults 55+ and anyone getting back into exercise after time away. In Lake Norman or online.';
+    heroIntro.textContent = 'Personalized coaching for adults who want to rebuild strength, move with confidence, and stay capable with age. Come join the personal training studio -- either in Lake Norman or online.';
   }
 
   const fitLabel = document.querySelector('.fit-strip-label');
-  if (fitLabel) fitLabel.textContent = 'Coaching for';
+  if (fitLabel) fitLabel.textContent = 'Coaching for...';
 
   const fitItems = document.querySelector('.fit-strip-items');
   if (fitItems) {
     const audiences = [
       'Strength After 55',
       'Getting Back Into Exercise',
-      'Moving Better & Staying Capable',
+      'Balance & Stability',
       'Training Around Past Injuries',
       'Active & Performance Goals'
     ];
@@ -279,7 +352,7 @@
 
   const coachingIntro = document.querySelector('.coaching-options .section-lead .section-intro');
   if (coachingIntro) {
-    coachingIntro.textContent = 'Built especially for adults 55+ and people returning to training, while still scaling to active and performance goals. Strength is the anchor; the rest of the plan supports it.';
+    coachingIntro.textContent = 'A program designed especially for adults 55+ wanting to build muscle, avoid injury, and lose weight. We teach fitness as a lifestyle while still working towards performance goals. Strength is the anchor; the rest of the plan supports it.';
   }
 
   const serviceCards = document.querySelectorAll('.service-card');
@@ -443,7 +516,6 @@
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
-      // Compute stagger index among reveal siblings in the same parent
       const parent   = entry.target.parentElement;
       const siblings = parent
         ? [...parent.children].filter(el => el.matches(selector))
